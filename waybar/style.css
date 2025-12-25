@@ -84,7 +84,6 @@ tooltip {
 
 #clock,
 #network,
-#bluetooth,
 #window,
 #custom-rofi,
 #custom-power_btn,
@@ -130,11 +129,6 @@ tooltip {
     color: #f9e2af;
 }
 
-
-#bluetooth {
-    border-radius: 0 18px 18px 0px;
-    color: #89b4fa;
-} 
 
 #window {
     background: #cdd6f4;
