@@ -62,6 +62,11 @@ fn main() -> anyhow::Result<()> {
                             // Run the installation step
                             let result = execute_menu_action(selected.id);
                             
+                            // Wait for user confirmation before re-entering TUI
+                            println!("\nPress Enter to continue...");
+                            let mut input = String::new();
+                            let _ = io::stdin().read_line(&mut input);
+                            
                             // Re-enter TUI
                             enable_raw_mode()?;
                             execute!(terminal.backend_mut(), EnterAlternateScreen)?;
@@ -71,9 +76,6 @@ fn main() -> anyhow::Result<()> {
                             } else if let Err(e) = result {
                                 eprintln!("Error: {}", e);
                             }
-                            
-                            println!("\nPress Enter to continue...");
-                            let _ = event::read();
                         }
                     }
                     _ => {}

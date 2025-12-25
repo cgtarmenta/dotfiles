@@ -2,10 +2,14 @@ use std::process::{Command, Stdio};
 use anyhow::{Context, Result};
 
 pub fn run_script_function(function_name: &str) -> Result<()> {
-    let script_path = std::env::current_dir()?
-        .parent()
-        .ok_or_else(|| anyhow::anyhow!("Could not find parent directory"))?
-        .join("install-functions.sh");
+    // Get the repository root directory (where install-functions.sh is located)
+    let repo_root = std::env::current_dir()?
+        .ancestors()
+        .find(|p| p.join("install-functions.sh").exists())
+        .ok_or_else(|| anyhow::anyhow!("Could not find install-functions.sh"))?
+        .to_path_buf();
+    
+    let script_path = repo_root.join("install-functions.sh");
 
     let output = Command::new("bash")
         .arg("-c")

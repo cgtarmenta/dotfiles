@@ -230,14 +230,36 @@ install_optional() {
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         log_info "Installing optional packages..."
-        yay -S --noconfirm intellij-idea-ultimate-edition slack-desktop teams-for-linux whatsapp-for-linux
         
-        if [ $? -eq 0 ]; then
+        # Install packages one by one to handle conflicts better
+        local failed_packages=()
+        
+        # IntelliJ IDEA
+        log_info "Installing IntelliJ IDEA Community Edition..."
+        yay -S --noconfirm intellij-idea-community-edition || failed_packages+=("intellij-idea-community-edition")
+        
+        # Slack (prefer Wayland version if available)
+        if pacman -Qq slack-desktop-wayland &>/dev/null; then
+            log_info "Slack Wayland already installed, skipping..."
+        else
+            log_info "Installing Slack for Wayland..."
+            yay -S --noconfirm slack-desktop-wayland || failed_packages+=("slack-desktop-wayland")
+        fi
+        
+        # Teams
+        log_info "Installing Teams for Linux..."
+        yay -S --noconfirm teams-for-linux || failed_packages+=("teams-for-linux")
+        
+        # WhatsApp
+        log_info "Installing WhatsApp for Linux..."
+        yay -S --noconfirm whatsapp-for-linux || failed_packages+=("whatsapp-for-linux")
+        
+        if [ ${#failed_packages[@]} -eq 0 ]; then
             log_success "Optional programs installed successfully"
             return 0
         else
-            log_error "Failed to install some optional programs"
-            return 1
+            log_warning "Some packages failed to install: ${failed_packages[*]}"
+            return 0  # Don't fail the whole step
         fi
     else
         log_info "Skipping optional programs"
