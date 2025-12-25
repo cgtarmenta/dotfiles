@@ -28,7 +28,6 @@
 		"group/hardware",
 		"group/audio",
 		"network",
-		"bluetooth",
 		"tray",
 		"group/exit",
 		"custom/wol",
