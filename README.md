@@ -41,7 +41,7 @@ Below a table of each package that should be installed, and its purpose. If you 
 | Package                   | Description |
 | ------------------------- | ----------- |
 | `hyprland`                | Hyprland compositor |
-| `kitty`                   | Default terminal |
+|| `warp-terminal`           | Default terminal |
 | `waybar`                  | Customizable Wayland bar |
 | `swaybg`                  | Used to set a desktop background image |
 | `rofi-wayland`            | A window switcher, application launcher and dmenu replacement |
@@ -166,32 +166,46 @@ It contains explicit keybinds for F1 to F6 function keys, although they, and mul
 | <kbd>XF86AudioPlay</kbd>                       | Play-pause current player |
 | <kbd>XF86AudioPrev</kbd>                       | Go to next track on current player |
 | <kbd>XF86AudioNext</kbd>                       | Go to previous track on current player |
-| <kbd>Super</kbd>+<kbd>Q</kbd>                  | Open Kitty terminal                               |
-| <kbd>Super</kbd>+<kbd>W</kbd>                  | Kill active window                                |
-| <kbd>Super</kbd>+<kbd>L</kbd>                  | Lock the screen, using swaylock                   |
-| <kbd>Super</kbd>+<kbd>M</kbd>                  | Show the logout screen, using wlogout             |
-| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> | Exit the Hyrpland environment                     |
-| <kbd>Super</kbd>+<kbd>V</kbd>                  | Toggle on/off floating for the active window      |
-| <kbd>Super</kbd>+<kbd>P</kbd>                  | Toggle pseudo-tiling                              |
-| <kbd>Super</kbd>+<kbd>J</kbd>                  | Toggle split
-| <kbd>Super</kbd>+<kbd>Space</kbd>              | Show the graphical app launcher and window switcher using rofi |
-| <kbd>Super</kbd>+<kbd>S</kbd>                  | Take a screenshot                                 |
+|| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd>    | Open Warp terminal (alternative)                  |
+|| <kbd>Super</kbd>+<kbd>Return</kbd>             | Open Warp terminal                                |
+|| <kbd>Super</kbd>+<kbd>E</kbd>                  | Open Thunar file manager                          |
+|| <kbd>Super</kbd>+<kbd>Q</kbd>                  | Kill active window                                |
+|| <kbd>Super</kbd>+<kbd>L</kbd>                  | Lock the screen                                   |
+|| <kbd>Super</kbd>+<kbd>O</kbd>                  | Reload waybar                                     |
+|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> | Exit Hyprland environment                         |
+|| <kbd>Super</kbd>+<kbd>V</kbd>                  | Toggle floating for active window                 |
+|| <kbd>Super</kbd>+<kbd>F</kbd>                  | Toggle fullscreen                                 |
+|| <kbd>Super</kbd>+<kbd>Y</kbd>                  | Pin window (shows on all workspaces)              |
+|| <kbd>Super</kbd>+<kbd>J</kbd>                  | Toggle split                                      |
+|| <kbd>Super</kbd>+<kbd>K</kbd>                  | Toggle group mode                                 |
+|| <kbd>Super</kbd>+<kbd>Tab</kbd>                | Switch to next window in group                    |
+|| <kbd>Super</kbd>+<kbd>Space</kbd>              | Show the app launcher (rofi)                      |
+|| <kbd>Print</kbd>                               | Screenshot region                                 |
+|| <kbd>Ctrl</kbd>+<kbd>Print</kbd>               | Screenshot active window                          |
+|| <kbd>Alt</kbd>+<kbd>Print</kbd>                | Screenshot entire screen                          |
+|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> | Flameshot GUI                                     |
+|| <kbd>Super</kbd>+<kbd>G</kbd>                  | Remove gaps between windows                       |
+|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd> | Restore default gaps                              |
 | <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> | Reload waybar                                     |
-| <kbd>Super</kbd>+<kbd>[1~9]</kbd>              | Open Thunar (1), WhatsDesk (2), Chromium (3), Discord (4), Telegram Desktop (5), Steam (6), none (7), VSCodium (8), Spotify Launcher (9) |
-| <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>0</kbd>  | Reset screen temperature to 6500K                 |
-| <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>↑</kbd>  | Increase screen temperature by 500K               |
-| <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>↓</kbd>  | Decrease screen temperature by 500K               |
-| <kbd>Super</kbd>+<kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> | Move through the active workspace |
-| <kbd>Alt</kbd>+<kbd>Tab</kbd>                  | Cycle through windows on same workspace           |
-| <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd> | Cycle through windows on same workspace (reverse) |
-| <kbd>Super</kbd>+<kbd>Tab</kbd>                | Switches to previous active workspace             |
-| <kbd>Super</kbd>+<kbd>[F1~F12]</kbd>           | Change to **n**th workspace, up to 12             |
-| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>[F1~F12]</kbd> | Move current window to **n**th workspace, up to 12|
-| <kbd>Super</kbd>+<kbd>Scroll↑</kbd><kbd>Scroll↓</kbd> | Scroll through existing workspaces         |
-| <kbd>Super</kbd>+<kbd>LMB</kbd>                | Move window with dragging                         |
-| <kbd>Super</kbd>+<kbd>RMB</kbd>                | Resize window with dragging                       |
-| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Space</kbd>+<kbd>[1~4]</kbd>    | Change background to [Moon Over Mondstat](./hypr/moon-over-mondstat.jpg) (1), [Sucrose](./hypr/sucrose.jpg) (2), [Sayu Birthday Without Characters](./hypr/sayu-without-char.jpg) (3), [Xiao](./hypr/xiao.jpg) (4) |
-
+|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>F[1-9]</kbd> | Launch apps: Thunar(F1), WhatsDesk(F2), Chromium(F3), Discord(F4), Telegram(F5), Steam(F6), VSCodium(F8), Spotify(F9) |
+|| <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>0</kbd> | Reset screen temperature to 6500K      |
+|| <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↑</kbd> | Increase screen temperature (+500K)    |
+|| <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↓</kbd> | Decrease screen temperature (-500K)    |
+|| <kbd>Super</kbd>+<kbd>R</kbd>                  | Activate resize mode                              |
+|| <kbd>Super</kbd>+<kbd>←→↑↓</kbd>               | Move focus through windows                        |
+|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>←→↑↓</kbd> | Move window                                   |
+|| <kbd>Super</kbd>+<kbd>[1-9,0]</kbd>            | Switch to workspace 1-10                          |
+|| <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>[1-9,0]</kbd> | Move window and switch to workspace         |
+|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>[1-9,0]</kbd> | Move window silently to workspace          |
+|| <kbd>Super</kbd>+<kbd>Period</kbd>             | Next workspace                                    |
+|| <kbd>Super</kbd>+<kbd>Comma</kbd>              | Previous workspace                                |
+|| <kbd>Super</kbd>+<kbd>Slash</kbd>              | Switch to previous workspace                      |
+|| <kbd>Super</kbd>+<kbd>Minus</kbd>              | Move to special workspace                         |
+|| <kbd>Super</kbd>+<kbd>Equal</kbd>              | Toggle special workspace                          |
+|| <kbd>Super</kbd>+<kbd>F1</kbd>                 | Toggle scratchpad                                 |
+|| <kbd>Super</kbd>+<kbd>Scroll↑↓</kbd>           | Scroll through workspaces                         |
+|| <kbd>Super</kbd>+<kbd>LMB</kbd>                | Move window with dragging                         |
+|| <kbd>Super</kbd>+<kbd>RMB</kbd>                | Resize window with dragging                       |
 ### Wallpapers
 
 <div class="grid" markdown>
