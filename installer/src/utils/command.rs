@@ -5,11 +5,14 @@ pub fn run_script_function(function_name: &str) -> Result<()> {
     let script_path = std::env::current_dir()?
         .parent()
         .ok_or_else(|| anyhow::anyhow!("Could not find parent directory"))?
-        .join("install.sh");
+        .join("install-functions.sh");
 
     let output = Command::new("bash")
         .arg("-c")
-        .arg(format!("source {} && {}", script_path.display(), function_name))
+        .arg(format!("cd {} && source {} && {}", 
+            script_path.parent().unwrap().display(),
+            script_path.display(), 
+            function_name))
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .stdin(Stdio::inherit())
