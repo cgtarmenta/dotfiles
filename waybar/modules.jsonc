@@ -7,9 +7,9 @@
             "(.*) - Thunar": " $1",
             "(.*) - Discord": " $1",
             "Unity - (.*)": " $1",
-            "Steam": " Steam",
-            "WhatsDesk": " WhatsDesk",
-            "Kitty": " $1",
+            "Steam": " Steam",
+            "WhatsDesk": " WhatsDesk",
+            "Warp": " $1",
             "class<org.telegram.desktop>": " $1",
             "class<spotify>": " Spotify",
             "class<unityhub>": " UnityHub",
@@ -38,9 +38,9 @@
             "(.*) - Thunar": " ",
             "class<discord>": " ",
             "Steam": " ",
-            "class<org.telegram.desktop>": " ",
-            "WhatsDesk": " ",
-            "Kitty": " ",
+            "class<org.telegram.desktop>": " ",
+            "WhatsDesk": " ",
+            "Warp": " ",
             "class<spotify>": " ",
             "class<notion>": " ", // TODO add notion's symbol icon
             "class<unityhub>": " ",
@@ -143,7 +143,7 @@
         "format-alt-click": "click-right",
         "critical-threshold": 80,
         "format-critical": " {temperatureC}°C",
-        "on-click": "kitty --title btop sh -c 'btop'",
+        "on-click": "warp-terminal --title btop sh -c 'btop'",
         "tooltip-format": "Temperatura CPU",
         "tooltip": true
     },
@@ -158,7 +158,7 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "interval": 1,
         "on-click": "wl-copy $(ip address show up scope global | grep inet | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c5-)",
-        "on-click-right": "kitty -e nmtui",
+        "on-click-right": "warp-terminal -e nmtui",
         "max-length": 30
     },
 
@@ -210,8 +210,8 @@
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/updates.sh",
         "restart-interval": 3600,
-        "on-click": "kitty --title Aggiornamenti sh -c ~/.config/waybar/scripts/installaupdates.sh",
-        "on-click-right": "kitty --title 'Pacchetti Installati' sh -c ~/.config/waybar/scripts/listpackages.sh",
+        "on-click": "warp-terminal --title Aggiornamenti sh -c ~/.config/waybar/scripts/installaupdates.sh",
+        "on-click-right": "warp-terminal --title 'Pacchetti Installati' sh -c ~/.config/waybar/scripts/listpackages.sh",
         "tooltip": true
     },
 
@@ -224,7 +224,7 @@
         "exec":"~/.config/waybar/scripts/tailscaleinfo.sh",
         "interval": 60,
         "on-click": "~/.config/waybar/scripts/wol.sh",
-        "on-click-right": "kitty --title 'Connetti a '$(cat ~/.config/.secrets/hostname.txt)'' sh -c ~/.config/waybar/scripts/connectssh.sh",
+        "on-click-right": "warp-terminal --title 'Connetti a '$(cat ~/.config/.secrets/hostname.txt)'' sh -c ~/.config/waybar/scripts/connectssh.sh",
         "tooltip": true
     },
 
@@ -309,13 +309,13 @@
         "format": "{max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
         "max-length": 13,
         "min-length": 13,
-        "on-click": "kitty --title btop sh -c 'btop'"
+        "on-click": "warp-terminal --title btop sh -c 'btop'"
     },
 
     "memory": {
         "interval": 30,
         "format": "  {used:0.2f} / {total:0.0f} GB",
-        "on-click": "kitty --title btop sh -c 'btop'"
+        "on-click": "warp-terminal --title btop sh -c 'btop'"
     },
 
     "custom/storage": {
