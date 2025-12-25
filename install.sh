@@ -32,13 +32,14 @@ fi
 read -n1 -rep 'Would you like to install the packages? (y,n)' INST
 if [[ $INST == "Y" || $INST == "y" ]]; then
     yay -S --noconfirm hyprland kitty waybar \
-    swaybg swaylock-effects rofi-wayland wlogout swaync thunar \
+    swaybg swaylock-effects swaylock-fancy rofi-wayland wlogout swaync thunar \
     swayidle ttf-jetbrains-mono-nerd polkit-gnome starship \
     swappy grim slurp pamixer brightnessctl gvfs \
     bluez bluez-utils blueman nwg-look xfce4-settings \
     dracula-gtk-theme dracula-icons-git xdg-desktop-portal-hyprland \
     wl-gammarelay hyfetch power-profiles-daemon sddm \
-    ttf-fira-code ttf-font-awesome jq fzf btop \
+    ttf-fira-code ttf-font-awesome wol jq playerctl flameshot wl-clipboard \
+    telegram-desktop discord steam spotify-launcher chromium tailscale fzf btop
 
     # Start the bluetooth service
     echo -e "Starting the Bluetooth Service...\n"
@@ -54,7 +55,7 @@ fi
 read -n1 -rep 'Would you like to copy config files? (y,n)' CFG
 if [[ $CFG == "Y" || $CFG == "y" ]]; then
     echo -e "Copying config files...\n"
-    cp -R hypr kitty neofetch swaylock waybar wlogout rofi hyfetch.json ~/.config/
+    cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi hyfetch.json ~/.config/
 
     # Set some files as exactable 
     chmod +x ~/.config/hypr/xdg-portal-hyprland
@@ -65,7 +66,7 @@ fi
 read -n1 -rep 'Would you like to install and configure wake on lan with waybar? (y,n)' WOL
 if [[ $WOL == "Y" || $WOL == "y" ]]; then
     yay -S --noconfirm wol
-    mkdir -p "~/.config/.secrets"
+    mkdir -p ~/.config/.secrets
     read -p "Enter IP Address: " IPAddress
     read -p "Enter MAC Address: " MACAddress
     echo -e "$IPAddress" > ~/.config/.secrets/ip-address.txt
@@ -77,7 +78,7 @@ read -n1 -rep 'Would you like to install and configure tailscale with waybar? (y
 if [[ $TAIL == "Y" || $TAIL == "y" ]]; then
     echo "Installing tailscale..."
     yay -S --noconfirm tailscale
-    mkdir -p "~/.config/.secrets"
+    mkdir -p ~/.config/.secrets
     read -p "Enter hostname: " hostname
     echo -e "$hostname" > ~/.config/.secrets/hostname.txt
     echo -e "Enable tailscale:"
@@ -101,9 +102,7 @@ fi
 ### Install optionals programs ###
 read -n1 -rep 'Would you like to install optional programs? (y,n)' APP
 if [[ $APP == "Y" || $APP == "y" ]]; then
-    yay -S --noconfirm telegram-desktop notion-app-electron \
-    discord steam spotify-launcher chromium vscodium-bin \
-    whatdesk-bin \
+    yay -S --noconfirm notion-app-electron vscodium-bin whatsdesk-bin
 
 fi
 
