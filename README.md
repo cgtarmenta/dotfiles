@@ -89,20 +89,29 @@ pacman -S hyprland kitty waybar swaybg rofi-wayand swaync thunar swayidle ttf-je
 ```
 
 #### AUR packages
-| Package | Description |
-| ------- | ----------- |
-| `wlogout`                 | Logout menu |
-| `swaylock-effects`        | Allow to lock the screen, fork that adds visual effects |
-| `swaylock-fancy`          | Swaylock with fancy effects |
-| `dracula-gtk-theme`       | Default theme |
-| `dracula-icons-git`       | Default icons |
-| `sddm-eucalyptus-drop`    | Sddm theme    |
-| `notion-app-electron`     | Connected workspaces |
-| `vscodium-bin`            | Binary releases of VS Code without MS branding/telemetry/licensing |
-| `whatsdesk-bin`           | Unofficial client of Whatsapp
+|| Package | Description |
+|| ------- | ----------- |
+|| `wlogout`                 | Logout menu |
+|| `swaylock-effects`        | Allow to lock the screen, fork that adds visual effects |
+|| `swaylock-fancy`          | Swaylock with fancy effects |
+|| `dracula-gtk-theme`       | Default theme |
+|| `dracula-icons-git`       | Default icons |
+|| `sddm-eucalyptus-drop`    | Sddm theme    |
 
 ```sh
-yay -S wlogout swaylock-effects swaylock-fancy dracula-gtk-theme dracula-icons-git sddm-eucalyptus-drop notion-app-electron vscodium-bin whatsdesk-bin
+yay -S wlogout swaylock-effects swaylock-fancy dracula-gtk-theme dracula-icons-git sddm-eucalyptus-drop
+```
+
+#### Optional Development & Communication Apps
+|| Package | Description |
+|| ------- | ----------- |
+|| `intellij-idea-ultimate-edition` | IntelliJ IDEA Ultimate IDE for Java and other languages |
+|| `slack-desktop`           | Team collaboration and messaging |
+|| `teams-for-linux`         | Unofficial Microsoft Teams client |
+|| `whatsapp-for-linux`      | Unofficial WhatsApp Desktop client |
+
+```sh
+yay -S intellij-idea-ultimate-edition slack-desktop teams-for-linux whatsapp-for-linux
 ```
 Or your AUR helper of choice. 
 

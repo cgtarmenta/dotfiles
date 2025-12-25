@@ -226,11 +226,11 @@ install_starship() {
 install_optional() {
     log_info "Installing optional programs..."
     
-    read -p "Install optional programs (notion, vscodium, whatsdesk)? (y/n) " -n 1 -r
+    read -p "Install optional programs (IntelliJ, Slack, Teams, WhatsApp Desktop)? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         log_info "Installing optional packages..."
-        yay -S --noconfirm notion-app-electron vscodium-bin whatsdesk-bin
+        yay -S --noconfirm intellij-idea-ultimate-edition slack-desktop teams-for-linux whatsapp-for-linux
         
         if [ $? -eq 0 ]; then
             log_success "Optional programs installed successfully"
