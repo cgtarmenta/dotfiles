@@ -1,0 +1,5 @@
+# Secrets
+.secrets/
+
+# Temporary file, for testing configs
+*temp/
