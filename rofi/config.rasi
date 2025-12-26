@@ -1,224 +1,136 @@
-/**
+/*
+ * ROFI color theme
  *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
-/** 
- * This configuration is an edited version 
- * from https://github.com/adi1090x/rofi
-**/
+ * Based on Base16 Material Color Scheme (https://github.com/ntpeters/base16-materialtheme-scheme)
+ *
+ * Modified by: Dave Davenport
+ * User: Tomaszal
+ * Copyright: Tomas Zaluckij
+ */
 
-
-/*****----- Configuration -----*****/
-configuration {
-	modi:                       "drun,window,ssh";
-    show-icons:                 true;
-    display-drun:               "APPS";
-    display-run:                "RUN";
-    display-filebrowser:        "FILES";
-    display-window:             "WINDOWS";
-    display-ssh:                "SSH";
-	drun-display-format:        "{name}";
-	window-format:              "{w} · {c}";
-
-
-	/*---------- SSH settings ----------*/
-	ssh-client: "ssh";
-	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";
-	parse-hosts: true;
-	parse-known-hosts: true;
-}
-
-/*****----- Global Properties -----*****/
 * {
-    font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #D0D0D0;
-    background-alt:              #E9E9E9;
-    foreground:                  #161616;
-    selected:                    #BEBEBE;
-    active:                      #999999;
-    urgent:                      #808080;
+	base00: #263238;
+	base01: #2E3C43;
+	base02: #314549;
+	base03: #546E7A;
+	base04: #B2CCD6;
+	base05: #EEFFFF;
+	base06: #EEFFFF;
+	base07: #FFFFFF;
+	base08: #F07178;
+	base09: #F78C6C;
+	base0A: #FFCB6B;
+	base0B: #C3E88D;
+	base0C: #89DDFF;
+	base0D: #82AAFF;
+	base0E: #C792EA;
+	base0F: #FF5370;
+
+	/*base0D: #00BCD4;*/
+
+	spacing: 0;
+	background-color: transparent;
+
 }
 
-/*****----- Main Window -----*****/
 window {
-    /* properties for window widget */
-    transparency:                "real";
-    location:                    center;
-    anchor:                      center;
-    fullscreen:                  false;
-    width:                       1000px;
-    x-offset:                    0px;
-    y-offset:                    0px;
-    background-image:            url("~/.config/rofi/images/f-temp.png", width);
-
-    /* properties for all widgets */
-    enabled:                     true;
-    border-radius:               15px;
-    cursor:                      "default";
-    background-color:            transparent;
+	transparency: "real";
+	background-color: #263238CC; /*base00 + CC (80% opacity)*/
 }
 
-/*****----- Main Box -----*****/
 mainbox {
-    enabled:                     true;
-    spacing:                     0px;
-    background-color:            transparent;
-    orientation:                 vertical;
-    children:                    [ "inputbar", "listbox" ];
+	children: [inputbar, message, mode-switcher, listview];
+	spacing: 30px;
+	padding: 30px 0;
+	border: 1px;
+	border-color: @base0D;
 }
 
-listbox {
-    spacing:                     20px;
-    padding:                     20px;
-    background-color:            transparent;
-    orientation:                 vertical;
-    children:                    [ "message", "listview" ];
-}
-
-/*****----- Inputbar -----*****/
 inputbar {
-    enabled:                     true;
-    spacing:                     10px;
-    padding:                     100px 60px;
-    background-color:            transparent;
-    text-color:                  @foreground;
-    orientation:                 horizontal;
-    children:                    [ "textbox-prompt-colon", "entry", "dummy", "mode-switcher" ];
+	padding: 0 30px;
+	children: [prompt, textbox-prompt-colon, entry, case-indicator];
 }
+
+prompt {
+	text-color: @base0D;
+}
+
 textbox-prompt-colon {
-    enabled:                     true;
-    expand:                      false;
-    str:                         "";
-    padding:                     12px 15px;
-    border-radius:               100%;
-    background-color:            @background-alt;
-    text-color:                  inherit;
+	expand: false;
+	str: ":";
+	margin: 0 1ch 0 0;
+	text-color: @base0D;
 }
+
 entry {
-    enabled:                     true;
-    expand:                      false;
-    width:                       300px;
-    padding:                     12px 16px;
-    border-radius:               100%;
-    background-color:            @background-alt;
-    text-color:                  inherit;
-    cursor:                      text;
-    placeholder:                 "Cerca";
-    placeholder-color:           inherit;
-}
-dummy {
-    expand:                      true;
-    background-color:            transparent;
+	text-color: @base07;
 }
 
-/*****----- Mode Switcher -----*****/
-mode-switcher{
-    enabled:                     true;
-    spacing:                     10px;
-    background-color:            transparent;
-    text-color:                  @foreground;
+case-indicator {
+	text-color: @base0F;
 }
-button {
-    width:                       80px;
-    padding:                     12px;
-    border-radius:               100%;
-    background-color:            @background-alt;
-    text-color:                  inherit;
-    cursor:                      pointer;
+
+mode-switcher, message {
+	border: 1px 0;
+	border-color: @base0D;
 }
+
+button, textbox {
+	background-color: @base03;
+	text-color: @base07;
+	padding: 5px;
+}
+
 button selected {
-    background-color:            @selected;
-    text-color:                  @foreground;
+	background-color: @base0D;
 }
 
-/** TODO fix scrolling listview orientation~scroll **/
-/*****----- Listview -----*****/
 listview {
-    enabled:                     true;
-    columns:                     6;
-    lines:                       3;
-    cycle:                       false;
-    dynamic:                     true;
-    scrollbar:                   true;
-    layout:                      vertical;
-    reverse:                     false;
-    fixed-height:                true;
-    fixed-columns:               true;
-    
-    spacing:                     10px;
-    background-color:            transparent;
-    text-color:                  @foreground;
-    cursor:                      "default";
+	scrollbar: true;
+	margin: 0 10px 0 30px;
 }
 
-/*****----- Elements -----*****/
+scrollbar {
+	background-color: @base03;
+	handle-color: @base0D;
+	handle-width: 10px;
+	border: 0 1px;
+	border-color: @base0D;
+	margin: 0 0 0 20px;
+}
+
 element {
-    enabled:                     true;
-    spacing:                     10px;
-    padding:                     10px;
-    border-radius:               15px;
-    background-color:            transparent;
-    text-color:                  @foreground;
-    cursor:                      pointer;
-    orientation:                 vertical;
+	padding: 5px;
+  spacing: 5px;
+	highlight: bold underline;
+	children: [element-icon, element-text];
 }
-element normal.normal {
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-element normal.urgent {
-    background-color:            @urgent;
-    text-color:                  @foreground;
-}
-element normal.active {
-    background-color:            @active;
-    text-color:                  @foreground;
-}
-element selected.normal {
-    background-color:            @selected;
-    text-color:                  @foreground;
-}
-element selected.urgent {
-    background-color:            @urgent;
-    text-color:                  @foreground;
-}
-element selected.active {
-    background-color:            @urgent;
-    text-color:                  @foreground;
-}
-element-icon {
-    background-color:            transparent;
-    text-color:                  inherit;
-    size:                        64px;
-    cursor:                      inherit;
-}
-element-text {
-    background-color:            transparent;
-    text-color:                  inherit;
-    cursor:                      inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
+element-text, element-icon {
+	background-color : inherit;
+	text-color	     : inherit;
+	foreground-color : inherit;
 }
 
-/*****----- Message -----*****/
-message {
-    background-color:            transparent;
+element normal {
+	background-color: transparent;
 }
-textbox {
-    padding:                     15px;
-    border-radius:               15px;
-    background-color:            @background-alt;
-    text-color:                  @foreground;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
+
+element selected {
+	background-color: @base0D;
 }
-error-message {
-    padding:                     15px;
-    border-radius:               15px;
-    background-color:            @background;
-    text-color:                  @foreground;
+
+element alternate {
+	/*background-color: @base03;*/
+}
+
+element normal normal, element selected normal, element alternate normal {
+	text-color: @base07;
+}
+
+element normal urgent, element selected urgent, element alternate urgent {
+	text-color: @base0F;
+}
+
+element normal active, element selected active, element alternate active {
+	text-color: @base0B;
 }
