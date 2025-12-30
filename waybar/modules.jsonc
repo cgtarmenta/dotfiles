@@ -84,13 +84,31 @@
     },
 
     "backlight": {
-        "device": "intel_backlight",
+        "device": "amdgpu_bl2",
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
-        "tooltip-format": "Luminosità",
+        "tooltip-format": "Luminosità (ROG panel)",
         "tooltip": true
+    },
+
+    "custom/asus_profile": {
+        "format": "󰣇 {}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/asus-profile.sh",
+        "interval": 5,
+        "tooltip": true,
+        "tooltip-format": "ASUS Performance: {}"
+    },
+
+    "custom/asus_gpu_mode": {
+        "format": "󰢮 {}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/asus-gpu-mode.sh",
+        "interval": 10,
+        "tooltip": true,
+        "tooltip-format": "GPU Mode: {}"
     },
 
     "battery": {

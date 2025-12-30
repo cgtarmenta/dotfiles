@@ -38,8 +38,13 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
     bluez bluez-utils blueman nwg-look xfce4-settings \
     dracula-gtk-theme dracula-icons-git xdg-desktop-portal-hyprland \
     wl-gammarelay hyfetch power-profiles-daemon sddm \
+    asusctl supergfxctl \
     ttf-fira-code ttf-font-awesome wol jq playerctl flameshot wl-clipboard \
     telegram-desktop discord steam spotify-launcher chromium tailscale fzf btop
+
+    # Enable ASUS / ROG services for graphics and platform control
+    echo -e "Enabling ASUS ROG services (asusd, supergfxd)...\n"
+    sudo systemctl enable --now asusd.service supergfxd.service
 
     # Start the bluetooth service
     echo -e "Starting the Bluetooth Service...\n"

@@ -73,15 +73,19 @@ install_packages() {
         bluez bluez-utils blueman nwg-look xfce4-settings \
         dracula-gtk-theme dracula-icons-git xdg-desktop-portal-hyprland \
         wl-gammarelay hyfetch power-profiles-daemon sddm \
+        asusctl supergfxctl \
         ttf-fira-code ttf-font-awesome wol jq playerctl flameshot wl-clipboard \
         telegram-desktop discord steam spotify-launcher chromium tailscale fzf btop
     
     if [ $? -eq 0 ]; then
-        log_success "Core packages installed successfully"
-        
-        # Enable bluetooth service
+        log_success "Core packages ins        # Enable bluetooth service
         log_info "Enabling Bluetooth service..."
         sudo systemctl enable --now bluetooth.service
+
+        # Enable ASUS / ROG services
+        log_info "Enabling ASUS ROG services (asusd, supergfxd)..."
+        sudo systemctl enable --now asusd.service supergfxd.service 2>/dev/null || \
+            log_warning "asusd/supergfxd services not available or failed to enable"
         
         # Clean out other portals
         log_info "Removing conflicting xdg portals..."
