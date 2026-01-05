@@ -3,7 +3,6 @@
 
 
 ![screen](./showcases/moon-over-mondstat-showcase.png)
-_I like rice, but i prefer pasta_    
 
 > [!NOTE]
 > This rice is heavily inspired (copied) from [SolDoesTech](https://github.com/soldoestech)'s hyprland repos, check those if you'd like a probably better tested config. It also uses config taken from [klpod0s](https://github.com/klpod221/klpod0s). If there are any issues with the [hyprland](https://wiki.hyprland.org/) and [waybar](https://github.com/Alexays/Waybar/wiki/) configuration, before opening an issue, check with the wikis as i have no idea what i'm doing, also don't trust random installation scripts online :). If there are issues with the installation scripts report it here ty. 
@@ -19,16 +18,45 @@ You can install either the english (```main-en``` branch) or italians (```main``
 
 # Installation
 
-## Automatic
+## Automatic (TUI Installer)
 
-Run the [install script](./install.sh), it will try to install all needed [dependencies](#dependencies) 
-> [!CAUTION]
-> This script does not backup any existing config and does no error checking. It is meant for a fresh install.  
+This repository includes an interactive TUI installer located in the `installer/` folder. It is a Rust application (`dotfiles-installer`) that provides a menu to run individual installation steps or a full installation.
 
-```sh
-./install.sh
+> [!IMPORTANT]
+> The TUI installer uses `cargo` and `yay`. If you do not have them installed, you can install them with the commands below.
+
+### Install Rust toolchain (rustup) – if needed
+
+```bash
+# Install rustup (Rust toolchain manager)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# After installation, ensure cargo is on your PATH
+source "$HOME/.cargo/env"
 ```
-Yay need to be installed, as its used by the script to install all the packages. Refer to the official [yay page](https://github.com/Jguer/yay?tab=readme-ov-file#installation) for installation.  
+
+### Install yay – if needed
+
+```bash
+# Install build tools
+sudo pacman -S --needed git base-devel
+
+# Clone and build yay from AUR
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ..
+```
+
+### Run the TUI installer
+
+```bash
+# From repo root
+cd installer
+cargo run --release
+```
+
+The TUI installer calls functions defined in `install-functions.sh`. At runtime it searches upwards from the current directory to find `install-functions.sh`, so it does not rely on a hardcoded path and works as long as you start it from somewhere inside the cloned repository.
 
 ## Manual
 
@@ -133,27 +161,6 @@ Here is a list of useful and funny packages:
 yay -S cowsay fortune-mod pipes.sh imagemagick inkscape
 ```
 
-### Config
-
-Copy the configs to the `~/.config` folder:
-```bash
-cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi hyfetch.json .bashrc starship.toml ~/.config/
-``` 
-
-Set files as executable:
-```bash
-chmod +x ~/.config/hypr/xdg-portal-hyprland
-chmod +x ~/.config/waybar/scripts/*
-```
-
-Enables services:
-```bash
-sudo systemctl enable tailscaled
-sudo systemctl enable bluetooth.service
-```
-
-See [WoL and Tailscale](#wake-on-lan-and-tailscale-module) and [GitHub Notification](#github-notifications-module) section to manually configure the modules. 
-
 # Overview
 
 ## Hyprland
@@ -194,8 +201,6 @@ It contains explicit keybinds for F1 to F6 function keys, although they, and mul
 || <kbd>Alt</kbd>+<kbd>Print</kbd>                | Screenshot entire screen                          |
 || <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> | Flameshot GUI                                     |
 || <kbd>Super</kbd>+<kbd>G</kbd>                  | Remove gaps between windows                       |
-|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd> | Restore default gaps                              |
-| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> | Reload waybar                                     |
 || <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>F[1-9]</kbd> | Launch apps: Thunar(F1), WhatsDesk(F2), Chromium(F3), Discord(F4), Telegram(F5), Steam(F6), VSCodium(F8), Spotify(F9) |
 || <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>0</kbd> | Reset screen temperature to 6500K      |
 || <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↑</kbd> | Increase screen temperature (+500K)    |
@@ -272,24 +277,5 @@ I tried to base it off this [color scheme](https://color.adobe.com/it/olor-Theme
 
 I use [squared theme](https://www.gnome-look.org/p/2206255) for gtk, and [ant-dark](https://store.kde.org/p/1640981/) icons theme. To add themes and icon themes download and unzip theme respectively in ```~/.themes``` and ```~/.local/share/icons```, use this last directory to store cursor icons (i use my oshi [Rin Penrose](https://www.gnome-look.org/p/2260618)'s)
 
-For `sddm` I use the [eucalyptus-drop](https://gitlab.com/Matt.Jolly/sddm-eucalyptus-drop) theme, it is available on the AUR, and installed through the [install script](./install.sh). 
+For `sddm` I use the [eucalyptus-drop](https://gitlab.com/Matt.Jolly/sddm-eucalyptus-drop) theme, it is available on the AUR and can be installed via your AUR helper (for example `yay -S sddm-eucalyptus-drop`). 
 
-# To-Dos
-  - [x] Working To-Dos
-  - [x] Test the installation script :3 
-  - [x] Add usefull information in the README
-    - [ ] Module description
-  - [x] Create a version with english toolip in waybar
-  - [ ] Improve installation script
-    - [ ] Add the option to choose which language to use in the installation script
-    - [ ] Backup previous config files
-  - [ ] Create standalone module config for each waybar module
-
-
-# Contributions
-...and suggestions are welcome, just open an issue or a pull request :)
-
-# See Also
-
-[SolDoesTech](https://github.com/soldoestech), [LierB](https://github.com/LierB/dotfiles), [klpod221](https://github.com/klpod221/klpod0s) and hyprland configs; [sejjy's waybar config](https://github.com/sejjy/mechabar) and [adi1090's rofi config collections](https://github.com/adi1090x/rofi), 
-The [hyprland](https://wiki.hyprland.org/) and [waybar](https://github.com/Alexays/Waybar/wiki/) wikis. [Shade of a cat](https://shadeofacat.carrd.co/) and [Sevenics](https://www.deviantart.com/sevenics) amazing art. 
