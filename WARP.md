@@ -13,7 +13,7 @@ This is a personal dotfiles repository for a Hyprland-based desktop environment 
 - **Wlogout**: Logout menu
 - Various supporting utilities (swaybg, swayidle, swaync, etc.)
 
-The repository is designed for fresh installations and includes an automated installation script.
+The repository is designed for fresh installations and uses a Rust TUI installer (`installer/`) plus shared shell functions (`install-functions.sh`). The legacy `install.sh` is removed.
 
 ## Branch Structure
 
@@ -28,13 +28,14 @@ The repository is designed for fresh installations and includes an automated ins
 git clone https://github.com/00Darxk/dotfiles.git
 cd dotfiles
 
-# Run installation script (requires yay)
-./install.sh
+# Build/run TUI installer (requires rustup + yay)
+cd installer
+cargo run --release
 ```
 
-The install script is interactive and handles:
+The TUI handles:
 - Package installation via yay
-- Config file deployment to ~/.config
+- Config deployment to ~/.config (hypr, waybar, kitty, pipewire, wireplumber, etc.)
 - Optional WoL/Tailscale module setup
 - Starship shell configuration
 - Service enablement (bluetooth, tailscaled)
@@ -55,22 +56,19 @@ chmod +x ~/.config/waybar/scripts/*
 
 ```
 .
+├── installer/          # Rust TUI (dotfiles-installer)
+├── install-functions.sh# Bash functions invoked by TUI
 ├── hypr/               # Hyprland compositor config
-│   ├── hyprland.conf   # Main config with keybinds, window rules, startup apps
-│   └── *.jpg           # Wallpaper images
-├── waybar/             # Status bar
-│   ├── config.jsonc    # Module layout and groups
-│   ├── modules.jsonc   # Individual module definitions (not in repo root)
-│   ├── style.css       # Styling
-│   └── scripts/        # Custom module scripts (bash)
+├── waybar/             # Status bar configs + scripts
+├── pipewire/           # PipeWire pulse configs (flat-volumes off)
+├── wireplumber/        # WirePlumber rules (flat-volumes off, Logitech soft mixer)
 ├── kitty/              # Terminal config
-├── rofi/               # App launcher (from adi1090x collection)
+├── rofi/               # App launcher
 ├── swaylock/           # Screen lock config
-├── wlogout/            # Logout menu (from klpod0s)
+├── wlogout/            # Logout menu
 ├── neofetch/           # System info
 ├── starship.toml       # Shell prompt
-├── .bashrc             # Bash initialization
-└── install.sh          # Automated installer
+└── .bashrc             # Bash initialization
 ```
 
 ### Waybar Custom Modules

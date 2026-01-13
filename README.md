@@ -1,5 +1,5 @@
 # My dotfiles
-...and an installation script for a fresh linux with yay, hyprland and waybar. 
+Configs for Hyprland + Waybar with a TUI installer for fresh CachyOS/Arch setups.
 
 
 ![screen](./showcases/moon-over-mondstat-showcase.png)
@@ -14,13 +14,13 @@ git clone https://github.com/00Darxk/dotfiles.git
 cd dotfiles
 ```
 
-You can install either the english (```main-en``` branch) or italians (```main``` branch) tooltip version, by switching to that branch and running the installation script. 
+You can install either the english (```main-en```) or italian (```main```) tooltip version by switching branches and using the TUI installer.
 
 # Installation
 
 ## Automatic (TUI Installer)
 
-This repository includes an interactive TUI installer located in the `installer/` folder. It is a Rust application (`dotfiles-installer`) that provides a menu to run individual installation steps or a full installation.
+This repository includes an interactive TUI installer located in the `installer/` folder. It is a Rust application (`dotfiles-installer`) that provides a menu to run individual installation steps or a full installation. The installer calls functions from `install-functions.sh` (no legacy `install.sh`).
 
 > [!IMPORTANT]
 > The TUI installer uses `cargo` and `yay`. If you do not have them installed, you can install them with the commands below.
@@ -56,7 +56,7 @@ cd installer
 cargo run --release
 ```
 
-The TUI installer calls functions defined in `install-functions.sh`. At runtime it searches upwards from the current directory to find `install-functions.sh`, so it does not rely on a hardcoded path and works as long as you start it from somewhere inside the cloned repository.
+The TUI installer calls functions defined in `install-functions.sh`. At runtime it searches upwards from the current directory to find `install-functions.sh`, so it does not rely on a hardcoded path and works as long as you start it from somewhere inside the cloned repository. Audio sane-defaults (PipeWire/WirePlumber) are included in `pipewire/` and `wireplumber/`.
 
 ## Manual
 
