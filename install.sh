@@ -55,7 +55,7 @@ fi
 read -n1 -rep 'Would you like to copy config files? (y,n)' CFG
 if [[ $CFG == "Y" || $CFG == "y" ]]; then
     echo -e "Copying config files...\n"
-    cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi hyfetch.json ~/.config/
+    cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber hyfetch.json ~/.config/
 
     # Set some files as exactable 
     chmod +x ~/.config/hypr/xdg-portal-hyprland
