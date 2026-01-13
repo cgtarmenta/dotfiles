@@ -118,7 +118,7 @@ deploy_configs() {
     fi
     
     log_info "Copying configuration files..."
-    cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi hyfetch.json "$config_dir/"
+    cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber hyfetch.json "$config_dir/"
     
     # Set executable permissions
     log_info "Setting permissions..."
