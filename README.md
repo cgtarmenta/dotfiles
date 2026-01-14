@@ -213,6 +213,8 @@ It contains explicit keybinds for F1 to F6 function keys, although they, and mul
 || <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>[1-9,0]</kbd> | Move window silently to workspace          |
 || <kbd>Super</kbd>+<kbd>Period</kbd>             | Next workspace                                    |
 || <kbd>Super</kbd>+<kbd>Comma</kbd>              | Previous workspace                                |
+
+> Flameshot on Wayland/Hyprland: the session exports `FLAMESHOT_WAYLAND=1` and `QT_QPA_PLATFORM=wayland`, and `flameshot/flameshot.ini` enables the grim adapter to fix multi-monitor placement and scaling. If you copy these dotfiles to `~/.config`, Flameshot will launch in native Wayland mode and the capture region will match both monitors correctly.
 || <kbd>Super</kbd>+<kbd>Slash</kbd>              | Switch to previous workspace                      |
 || <kbd>Super</kbd>+<kbd>Minus</kbd>              | Move to special workspace                         |
 || <kbd>Super</kbd>+<kbd>Equal</kbd>              | Toggle special workspace                          |
