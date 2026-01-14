@@ -324,5 +324,13 @@
         "return-type": "json",
         "exec": "~/.config/waybar/scripts/weather.sh Valladolid",
         "exec-if": "ping wttr.in -c1"
+    },
+
+    "custom/screenshot": {
+        "format": "{icon}",
+        "format-icons": [""],
+        "tooltip-format": "Take Screenshot",
+        "on-click": "grim -g \"$(slurp)\" - | swappy -f -",
+        "tooltip": true
     }
 }
