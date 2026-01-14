@@ -79,7 +79,7 @@ Below a table of each package that should be installed, and its purpose. If you 
 | `ttf-jetbrains-mono-nerd` | Some nerd fonts for icons and overall look |
 | `polkit-gnome`            | Graphical superuser, needed for some applications |
 | `starship`                | Customizable shell prompt |
-| `swappy`                  | Screenshot editor tool |
+|| `satty`                   | Modern screenshot annotation tool |
 | `grim`                    | Screenshot tool, it grabs images from a Wayland compositor |
 | `slurp`                   | Selects a region in a Wayland compositor, used to screenshot |
 | `pamixer`                 | Pulseaudio command line mixer |
@@ -100,7 +100,6 @@ Below a table of each package that should be installed, and its purpose. If you 
 | `wol`                     | Wake-on-LAN tool for both CLI and web interfaces |
 | `jq`                      | CLI JSON processor |
 | `playerctl`               | MPRIS media player controller |
-| `flameshot`               | Screenshot tool with GUI |
 | `wl-clipboard`            | Wayland clipboard utilities |
 | `btop`                    | Monitor of system resources |
 | `telegram-desktop`        | Official Telegram Desktop client |
@@ -113,7 +112,6 @@ Below a table of each package that should be installed, and its purpose. If you 
 
 
 ```sh
-pacman -S hyprland kitty waybar swaybg rofi-wayand swaync thunar swayidle ttf-jetbrains-mono-nerd polkit-gnome starship swappy grim slurp pamixer brightnessctl gvfs bluez bluez-utils blueman nwg-look xfce4-settings xdg-desktop-portal-hyprland wl-gammarelay hyfetch power-profiles-daemon sddm tff-fira-code tff-font-awesome wol jq playerctl flameshot wl-clipboard telegram-desktop discord steam spotify-launcher chromium tailscale fzf
 ```
 
 #### AUR packages
@@ -214,7 +212,6 @@ It contains explicit keybinds for F1 to F6 function keys, although they, and mul
 || <kbd>Super</kbd>+<kbd>Period</kbd>             | Next workspace                                    |
 || <kbd>Super</kbd>+<kbd>Comma</kbd>              | Previous workspace                                |
 
-> Flameshot on Wayland/Hyprland: the session exports `FLAMESHOT_WAYLAND=1` and `QT_QPA_PLATFORM=wayland`, and `flameshot/flameshot.ini` enables the grim adapter to fix multi-monitor placement and scaling. If you copy these dotfiles to `~/.config`, Flameshot will launch in native Wayland mode and the capture region will match both monitors correctly.
 || <kbd>Super</kbd>+<kbd>Slash</kbd>              | Switch to previous workspace                      |
 || <kbd>Super</kbd>+<kbd>Minus</kbd>              | Move to special workspace                         |
 || <kbd>Super</kbd>+<kbd>Equal</kbd>              | Toggle special workspace                          |

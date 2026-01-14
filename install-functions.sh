@@ -69,11 +69,11 @@ install_packages() {
         hyprland warp-terminal waybar \
         swaybg swaylock-effects swaylock-fancy rofi-wayland wlogout swaync thunar \
         swayidle ttf-jetbrains-mono-nerd polkit-gnome starship \
-        swappy grim slurp pamixer brightnessctl gvfs \
+        satty grim slurp pamixer brightnessctl gvfs \
         bluez bluez-utils blueman nwg-look xfce4-settings \
         dracula-gtk-theme dracula-icons-git xdg-desktop-portal-hyprland \
         wl-gammarelay hyfetch power-profiles-daemon sddm \
-        ttf-fira-code ttf-font-awesome wol jq playerctl flameshot wl-clipboard \
+        ttf-fira-code ttf-font-awesome wol jq playerctl wl-clipboard \
         telegram-desktop discord steam spotify-launcher chromium tailscale fzf btop
     
     if [ $? -eq 0 ]; then
@@ -118,7 +118,7 @@ deploy_configs() {
     fi
     
     log_info "Copying configuration files..."
-    cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber flameshot hyfetch.json "$config_dir/"
+    cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber hyfetch.json "$config_dir/"
     
     # Set executable permissions
     log_info "Setting permissions..."

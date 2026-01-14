@@ -330,7 +330,7 @@
         "format": "{icon}",
         "format-icons": [""],
         "tooltip-format": "Take Screenshot",
-        "on-click": "grim -g \"$(slurp)\" - | swappy -f -",
+        "on-click": "grim -g \"$(slurp)\" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png",
         "tooltip": true
     }
 }
