@@ -74,7 +74,8 @@ Below a table of each package that should be installed, and its purpose. If you 
 | `swaybg`                  | Used to set a desktop background image |
 | `rofi-wayland`            | A window switcher, application launcher and dmenu replacement |
 | `swaync`                  | Graphical notification daemon |
-| `thunar`                  | Graphical file manager |
+|| `nautilus`                | Graphical file manager (GNOME Files) |
+|| `pamac-aur`               | Graphical package manager with AUR support |
 | `swayidle`                | Idle management deamon for Wayland |
 | `ttf-jetbrains-mono-nerd` | Some nerd fonts for icons and overall look |
 | `polkit-gnome`            | Graphical superuser, needed for some applications |
@@ -84,7 +85,7 @@ Below a table of each package that should be installed, and its purpose. If you 
 | `slurp`                   | Selects a region in a Wayland compositor, used to screenshot |
 | `pamixer`                 | Pulseaudio command line mixer |
 | `brightnessctl`           | Program to read and contro device brightness |
-| `gvfs`                    | Adds missing feature to thunar |
+|| `gvfs`                    | Adds missing feature to graphical file managers (e.g. Nautilus) |
 | `bluez`                   | Bluetooth protocol stack |
 | `bluez-utils`             | Command line utilities to interact with bluetooth devices |
 | `blueman`                 | GTK+ bluetooth manager |
@@ -182,7 +183,7 @@ It contains explicit keybinds for F1 to F6 function keys, although they, and mul
 | <kbd>XF86AudioNext</kbd>                       | Go to previous track on current player |
 || <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd>    | Open Warp terminal (alternative)                  |
 || <kbd>Super</kbd>+<kbd>Return</kbd>             | Open Warp terminal                                |
-|| <kbd>Super</kbd>+<kbd>E</kbd>                  | Open Thunar file manager                          |
+|| <kbd>Super</kbd>+<kbd>E</kbd>                  | Open Nautilus file manager                        |
 || <kbd>Super</kbd>+<kbd>Q</kbd>                  | Kill active window                                |
 || <kbd>Super</kbd>+<kbd>L</kbd>                  | Lock the screen                                   |
 || <kbd>Super</kbd>+<kbd>O</kbd>                  | Reload waybar                                     |
@@ -199,7 +200,7 @@ It contains explicit keybinds for F1 to F6 function keys, although they, and mul
 || <kbd>Alt</kbd>+<kbd>Print</kbd>                | Screenshot entire screen                          |
 || <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> | Flameshot GUI                                     |
 || <kbd>Super</kbd>+<kbd>G</kbd>                  | Remove gaps between windows                       |
-|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>F[1-9]</kbd> | Launch apps: Thunar(F1), WhatsDesk(F2), Chromium(F3), Discord(F4), Telegram(F5), Steam(F6), VSCodium(F8), Spotify(F9) |
+|| <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>F[1-9]</kbd> | Launch apps: Nautilus(F1), WhatsDesk(F2), Chromium(F3), Discord(F4), Telegram(F5), Steam(F6), VSCodium(F8), Spotify(F9) |
 || <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>0</kbd> | Reset screen temperature to 6500K      |
 || <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↑</kbd> | Increase screen temperature (+500K)    |
 || <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↓</kbd> | Decrease screen temperature (-500K)    |

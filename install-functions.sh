@@ -67,14 +67,15 @@ install_packages() {
     log_info "Installing Hyprland and dependencies..."
     yay -S --noconfirm \
         hyprland warp-terminal waybar \
-        swaybg swaylock-effects swaylock-fancy rofi-wayland wlogout swaync thunar \
+        swaybg swaylock-effects swaylock-fancy rofi-wayland wlogout swaync nautilus \
         swayidle ttf-jetbrains-mono-nerd polkit-gnome starship \
         satty grim slurp pamixer brightnessctl gvfs \
         bluez bluez-utils blueman nwg-look xfce4-settings \
-        dracula-gtk-theme dracula-icons-git xdg-desktop-portal-hyprland \
+        gnome-themes-extra dracula-gtk-theme dracula-icons-git xdg-desktop-portal-hyprland \
         wl-gammarelay hyfetch power-profiles-daemon sddm \
         ttf-fira-code ttf-font-awesome wol jq playerctl wl-clipboard \
-        telegram-desktop discord steam spotify-launcher chromium tailscale fzf btop
+        telegram-desktop discord steam spotify-launcher chromium tailscale fzf btop \
+        pamac-aur
     
     if [ $? -eq 0 ]; then
         log_success "Core packages installed successfully"

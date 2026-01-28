@@ -122,7 +122,7 @@ Key aspects of `hypr/hyprland.conf`:
 - **Keybinds**: Super as main modifier (CachyOS-compatible)
   - Super+Return: Terminal (kitty)
   - Super+Q: Kill window
-  - Super+E: File manager (thunar)
+  - Super+E: File manager (nautilus)
   - Super+L: Lock (swaylock-fancy)
   - Super+O: Reload waybar
   - Super+Space: App launcher (rofi)
@@ -137,7 +137,7 @@ Key aspects of `hypr/hyprland.conf`:
   - Super+[1-9,0]: Switch to workspace
   - Super+Ctrl+[1-9,0]: Move window to workspace and switch
   - Super+Shift+[1-9,0]: Move window to workspace silently
-  - Super+Shift+F[1-9]: Launch specific apps (thunar, whatsdesk, chromium, discord, telegram, steam, codium, spotify)
+  - Super+Shift+F[1-9]: Launch specific apps (nautilus, whatsdesk, chromium, discord, telegram, steam, codium, spotify)
   - Super+Period/Comma/Slash: Navigate workspaces
   - Super+Minus/Equal: Special workspaces
   - Super+F1: Scratchpad
@@ -145,7 +145,7 @@ Key aspects of `hypr/hyprland.conf`:
 
 ### Window Rules
 
-Opacity and floating rules for specific applications (kitty, thunar, VSCodium, Chromium, rofi, etc.) are defined as `windowrulev2` directives.
+Opacity and floating rules for specific applications (kitty, nautilus, VSCodium, Chromium, rofi, etc.) are defined via `windowrule` directives matching app classes.
 
 ### Secrets Management
 

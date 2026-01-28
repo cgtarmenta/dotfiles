@@ -2,10 +2,10 @@
     "hyprland/window": {
         "format": "{}",
         "rewrite": {
-            "(.*) - Chromium": " $1",
+            "(.*) - Chromium": " $1",
             "(.*) - VSCodium": "󰨞 $1",
-            "(.*) - Thunar": " $1",
-            "(.*) - Discord": " $1",
+            "(.*) - Nautilus": " $1",
+            "(.*) - Discord": " $1",
             "Unity - (.*)": " $1",
             "Steam": " Steam",
             "WhatsDesk": " WhatsDesk",
@@ -31,12 +31,12 @@
             "empty": ""
         },
         "window-rewrite": { // TODO complete
-            "title<.*youtube.*>": " ", 
-            "(.*) - Chromium": " ",
+            "title<.*youtube.*>": " ", 
+            "(.*) - Chromium": " ",
             "(.*)VSCodium": "󰨞 ",
             "class<Codium>": "󰨞 ",
-            "(.*) - Thunar": " ",
-            "class<discord>": " ",
+            "(.*) - Nautilus": " ",
+            "class<discord>": " ",
             "Steam": " ",
             "class<org.telegram.desktop>": " ",
             "WhatsDesk": " ",
