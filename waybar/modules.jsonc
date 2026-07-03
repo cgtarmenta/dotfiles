@@ -192,6 +192,15 @@
         }
     },
 
+    "custom/ac_idle_mode": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/hypr/scripts/ac-power-idle-toggle.sh status-json",
+        "interval": 2,
+        "on-click": "~/.config/hypr/scripts/ac-power-idle-toggle.sh toggle",
+        "tooltip": true
+    },
+
     "custom/power_btn": {
         "format" : "{icon}",
         "format-icons": [""],
