@@ -113,9 +113,9 @@ Waybar includes several custom modules in `waybar/scripts/`:
 
 ### Hyprland Configuration
 
-Key aspects of `hypr/hyprland.conf`:
+Key aspects of `hypr/hyprland.lua` (migrated from the legacy `hyprland.conf` format):
 
-- **Input**: Italian keyboard layout (`kb_layout = it`)
+- **Input**: Spanish keyboard layout (`kb_layout = "es"`)
 - **Monitor Setup**: Supports multi-monitor (1920x1080@60Hz defaults)
 - **Layout**: Dwindle tiling algorithm
 - **Startup Apps**: polkit-gnome, waybar, blueman-applet, nm-applet, swaybg, swaync, wl-gammarelay, tailscale
@@ -192,9 +192,9 @@ No automated tests. Validation is manual:
 ### Adding New Wallpapers
 
 1. Place image in `hypr/` directory (jpg preferred by author)
-2. Add keybind in `hypr/hyprland.conf`:
-   ```
-   bind = $mainMod SHIFT, Space, [1-4], exec, swaybg -m fill -i ~/.config/hypr/new-wallpaper.jpg
+2. Add keybind in `hypr/hyprland.lua`:
+   ```lua
+   hl.bind(mainMod .. " + SHIFT + SPACE + 5", hl.dsp.exec_cmd("swaybg -m fill -i ~/.config/hypr/new-wallpaper.jpg"))
    ```
 3. Update `swaylock/config` to change lock screen wallpaper
 

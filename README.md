@@ -166,7 +166,7 @@ yay -S cowsay fortune-mod pipes.sh imagemagick inkscape
 
 ### Keybindings
 
-You can check the keybinds in the [hyprland config](./hypr/hyprland.conf), or on the table below.
+You can check the keybinds in the [hyprland config](./hypr/hyprland.lua), or on the table below.
 
 It contains explicit keybinds for F1 to F6 function keys, although they, and multimedia keys, should all work out of the box; if there are issues check your keyboard on the [wiki](https://wiki.archlinux.org/title/Extra_keyboard_keys), and bind them to the corresponding keys. 
 
@@ -238,8 +238,8 @@ Credit to [Shade of a cat](https://shadeofacat.carrd.co/) and [Sevenics](https:/
 > [!NOTE]
 > I don't remember why I converted all the backgrounds from png to jpg, it should work either way. Too lazy to check the wiki. 
 
-To add a new wallpaper to hyprland, add a line at the end of the [hyprland.conf](./hypr/hyprland.conf) file, specifying the location of the image. 
-To set it at start, change the location of the exec call inside the [config](./hypr/hyprland.conf) to the background image. 
+To add a new wallpaper to hyprland, add a `hl.bind(...)` call for it near the other background binds in [hyprland.lua](./hypr/hyprland.lua), specifying the location of the image.
+To set it at start, change the `swaybg` command inside the `hl.on("config.reloaded", ...)` block in the [config](./hypr/hyprland.lua) to the background image. 
 
 In the same way you can edit the top line of the [swaylock config](./swaylock/config) to change the background image. 
 
