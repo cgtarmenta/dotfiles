@@ -99,33 +99,42 @@ install_packages() {
 # Function 3: Deploy Configuration Files
 deploy_configs() {
     log_info "Deploying configuration files..."
-    
+
     local config_dir="$HOME/.config"
+    local repo_dir="$(pwd)"
     local backup_dir="$HOME/.config-backup-$(date +%Y%m%d-%H%M%S)"
-    
-    # Check if configs already exist and backup
-    if [ -d "$config_dir/hypr" ] || [ -d "$config_dir/waybar" ]; then
+    local items=(hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber hyfetch.json)
+
+    # Back up anything real (not one of our own symlinks from a previous deploy)
+    local needs_backup=0
+    for item in "${items[@]}"; do
+        [ -e "$config_dir/$item" ] && [ ! -L "$config_dir/$item" ] && needs_backup=1
+    done
+
+    if [ "$needs_backup" -eq 1 ]; then
         log_warning "Existing configuration detected"
         read -p "Create backup? (y/n) " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             log_info "Creating backup at $backup_dir..."
             mkdir -p "$backup_dir"
-            [ -d "$config_dir/hypr" ] && cp -R "$config_dir/hypr" "$backup_dir/"
-            [ -d "$config_dir/waybar" ] && cp -R "$config_dir/waybar" "$backup_dir/"
-            [ -d "$config_dir/kitty" ] && cp -R "$config_dir/kitty" "$backup_dir/"
+            for item in "${items[@]}"; do
+                if [ -e "$config_dir/$item" ] && [ ! -L "$config_dir/$item" ]; then
+                    cp -R "$config_dir/$item" "$backup_dir/"
+                fi
+            done
             log_success "Backup created"
         fi
     fi
-    
-    log_info "Copying configuration files..."
-    cp -R hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber hyfetch.json "$config_dir/"
-    
-    # Set executable permissions
-    log_info "Setting permissions..."
-    chmod +x "$config_dir/hypr/xdg-portal-hyprland"
-    chmod +x "$config_dir/waybar/scripts/"*
-    
+
+    # Symlink (not copy) so repo edits apply immediately without a redeploy,
+    # and the repo is always the single source of truth for what's live.
+    log_info "Symlinking configuration files..."
+    for item in "${items[@]}"; do
+        rm -rf "$config_dir/$item"
+        ln -sf "$repo_dir/$item" "$config_dir/$item"
+    done
+
     log_success "Configuration files deployed successfully"
     return 0
 }
