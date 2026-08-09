@@ -42,12 +42,10 @@ The TUI handles:
 
 ### Manual Config Deployment
 ```bash
-# Copy configs
-cp -R hypr kitty neofetch swaylock waybar wlogout rofi hyfetch.json ~/.config/
-
-# Set executables
-chmod +x ~/.config/hypr/xdg-portal-hyprland
-chmod +x ~/.config/waybar/scripts/*
+# Symlink configs (from the repo root) so repo edits apply without a redeploy
+for item in hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber hyfetch.json; do
+    ln -sf "$(pwd)/$item" ~/.config/"$item"
+done
 ```
 
 ## Architecture
