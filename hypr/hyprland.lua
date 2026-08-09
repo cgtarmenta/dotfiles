@@ -125,7 +125,10 @@ hl.config({
     },
 
     master = {
-        new_status = true,
+        -- "master" | "slave" | "inherit" (string enum). The old .conf had the
+        -- boolean `new_status = true`, a leftover from the pre-rename
+        -- `new_is_master` variable; "master" preserves that original intent.
+        new_status = "master",
     },
 
     binds = {
