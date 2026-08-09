@@ -84,7 +84,9 @@
     },
 
     "backlight": {
-        "device": "intel_backlight",
+        // No "device" set: Waybar auto-picks the available backlight device.
+        // This desktop has none (module just disables itself); the laptop's
+        // panel gets picked up automatically regardless of its device name.
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set 1%+",
@@ -172,6 +174,19 @@
           "balanced": "",
           "power-saver": ""
         }
+    },
+
+    "custom/asus_gpu_mode": {
+        // Only shows on machines with supergfxctl (ASUS ROG hybrid-GPU
+        // laptops); the script itself also degrades to "N/A" if the binary
+        // is missing, but exec-if keeps it off the bar entirely elsewhere.
+        "format": "󰢮 {}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/asus-gpu-mode.sh",
+        "exec-if": "command -v supergfxctl",
+        "interval": 10,
+        "tooltip": true,
+        "tooltip-format": "GPU Mode: {}"
     },
 
     "custom/power_btn": {
