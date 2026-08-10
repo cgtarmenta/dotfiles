@@ -54,6 +54,11 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("blueman-applet")   -- Systray app for BT
     hl.exec_cmd("nm-applet --indicator") -- Systray app for Network/WiFi
     hl.exec_cmd("tailscale up")     -- Connect to Tailscale VPN
+    -- Idle daemon, laptop-only. Gated on supergfxctl (the ASUS ROG marker,
+    -- same signal the custom/asus_gpu_mode waybar module uses) so the desktop
+    -- never starts hypridle. hypridle.conf drives lock/dpms/suspend through
+    -- scripts/ac-power-idle-toggle.sh, which no-ops idle actions on AC power.
+    hl.exec_cmd("command -v supergfxctl >/dev/null 2>&1 && hypridle")
 end)
 
 -- plain exec equivalent: runs at startup AND re-runs on every config reload.
