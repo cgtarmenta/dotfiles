@@ -103,6 +103,11 @@ install_packages() {
     
     check_shelly || return 1
 
+    # --no-flatpak --no-appimage: this step only needs the repos and the AUR up to
+    # date, and `upgrade all` fails as a whole if any selected backend fails — on a
+    # machine far enough behind that shelly-flatpak-backend isn't installed yet,
+    # shelly reports no Flatpak support and takes the repo upgrade down with it.
+    # It gets installed below, so later runs could include those backends.
     log_info "Updating system..."
     shelly upgrade all --no-flatpak --no-appimage --no-confirm
 
@@ -124,7 +129,7 @@ install_packages() {
         hyfetch power-profiles-daemon sddm
         ttf-fira-code ttf-font-awesome wol jq playerctl wl-clipboard
         telegram-desktop discord steam spotify-launcher chromium tailscale
-        fzf btop shelly
+        fzf btop shelly shelly-flatpak-backend
     )
     # clickup-desktop rather than the better-known clickup, whose PKGBUILD
     # carries a sha256 upstream has since invalidated; both give /usr/bin/clickup.

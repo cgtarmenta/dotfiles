@@ -80,6 +80,7 @@ Below a table of each package that should be installed, and its purpose. If you 
 | `swaync`                  | Graphical notification daemon |
 || `nautilus`                | Graphical file manager (GNOME Files) |
 || `shelly`                  | Package manager for repos, AUR, Flatpak and AppImage; `shelly-ui` is its graphical front end |
+|| `shelly-flatpak-backend`  | Shelly's Flatpak backend — without it `shelly upgrade all` reports no Flatpak support and fails as a whole |
 | `swayidle`                | Idle management deamon for Wayland |
 | `ttf-jetbrains-mono-nerd` | Some nerd fonts for icons and overall look |
 | `polkit-gnome`            | Graphical superuser, needed for some applications |
