@@ -1,71 +1,128 @@
-{
-    "layer": "top",
-    "position": "top",
-    "mod": "dock",
-    "exclusive": true,
-    "passthrough": false,
-    "gtk-layer-shell": true,
+// Two bars, picked by the output they land on — no hostname detection needed,
+// because Waybar only instantiates a bar whose "output" matches a monitor that
+// is actually connected:
+//
+//   "!eDP-2"  → full bar: the desktop's ultrawide, or any external screen
+//               plugged into the laptop. Room for everything.
+//   "eDP-2"   → compact bar: the ROG Flow X13's internal 1920x1200 panel.
+//               No persistent workspace numbers, no RAM/disk readouts.
+//
+// Module *definitions* are shared from modules.jsonc; each bar only picks which
+// of them it shows, plus the couple of per-machine overrides below. Waybar's
+// include merge is "outer file wins, recursively", so an override here only has
+// to name the keys that differ — never the whole module.
+[
+    {
+        // ── Full bar (ultrawide / external monitor) ──
+        "layer": "top",
+        "position": "top",
+        "mod": "dock",
+        "exclusive": true,
+        "passthrough": false,
+        "gtk-layer-shell": true,
+        "output": ["!eDP-2"],
 
-    "include": [
-		"~/.config/waybar/modules.jsonc"
-	],
+        "include": [
+            "~/.config/waybar/modules.jsonc"
+        ],
 
-    "modules-left": [
-		"custom/rofi",
-		"hyprland/workspaces",
-		"temperature",
-		"hyprland/window"
-	],
-    "modules-center": [
-		"clock",
-		"custom/weather"
-	],
-    "modules-right": [
-		"custom/media",
-		"custom/storage",
-		"memory",
-		"cpu",
-		"group/hardware",
-		"custom/asus_gpu_mode",
-		"group/audio",
-		"network",
-		"tray",
-		"group/exit",
-		"custom/screenshot",
-		"custom/wol",
-		"custom/updates",
-		"custom/github",
-		"custom/swaync"
-	],
+        "modules-left": [
+            "custom/rofi",
+            "hyprland/workspaces",
+            "temperature",
+            "hyprland/window"
+        ],
+        "modules-center": [
+            "clock",
+            "custom/weather"
+        ],
+        "modules-right": [
+            "custom/media",
+            "custom/storage",
+            "memory",
+            "cpu",
+            "group/hardware",
+            "custom/asus_gpu_mode",
+            "group/audio",
+            "network",
+            "tray",
+            "group/exit",
+            "custom/screenshot",
+            "custom/wol",
+            "custom/updates",
+            "custom/github",
+            "custom/swaync"
+        ],
 
-	// Group Hardware
-	"group/hardware": {
-		"orientation": "horizontal",
-		"modules":[
-			"temperature",
-			"battery",
-			"power-profiles-daemon",
-			"custom/ac_idle_mode",
-			"custom/wl-gammarelay-temperature",
-			"backlight"
-		]
-	},
+        // Wide screen: keep all ten workspace numbers on the bar even when
+        // empty, so their position never shifts. 11/12 are the secondary
+        // screens' own workspaces.
+        "hyprland/workspaces": {
+            "persistent-workspaces": {
+                "*": 10,
+                "HDMI-A-1": [11, 12],
+                "DP-1": [11, 12]
+            }
+        },
 
-	// Group IO Audio
-	"group/audio": {
-		"orientation": "horizontal",
-		"modules": [
-			"wireplumber",
-			"pulseaudio#microphone"
-		]
-	},
+        // Desktop CPU sensor.
+        "temperature": {
+            "thermal-zone": 7
+        }
+    },
 
-	// Group Exit
-	"group/exit": {
-		"orientation": "horizontal",
-		"modules": [
-			"custom/power_btn",
-			"custom/lock_screen"
-		]
-	}
-}
+    {
+        // ── Compact bar (ROG Flow X13 internal panel) ──
+        "layer": "top",
+        "position": "top",
+        "mod": "dock",
+        "exclusive": true,
+        "passthrough": false,
+        "gtk-layer-shell": true,
+        "output": ["eDP-2"],
+
+        "include": [
+            "~/.config/waybar/modules.jsonc"
+        ],
+
+        // No "persistent-workspaces" override: without it Waybar shows only
+        // the workspaces actually in use, which is the only thing that fits on
+        // a 1920x1200 panel.
+        "modules-left": [
+            "custom/rofi",
+            "hyprland/workspaces",
+            "temperature",
+            "hyprland/window"
+        ],
+        "modules-center": [
+            "clock",
+            "custom/weather"
+        ],
+        // Dropped vs. the full bar: "memory" and "custom/storage". Live RAM and
+        // disk figures aren't worth the width here; "cpu" stays.
+        "modules-right": [
+            "custom/media",
+            "cpu",
+            "group/hardware",
+            "custom/asus_gpu_mode",
+            "group/audio",
+            "network",
+            "tray",
+            "group/exit",
+            "custom/screenshot",
+            "custom/wol",
+            "custom/updates",
+            "custom/github",
+            "custom/swaync"
+        ],
+
+        // This machine has no thermal_zone7 — only two acpitz zones, neither of
+        // them the CPU. k10temp (Tctl) is the real package sensor. Addressed by
+        // its stable sysfs device path rather than /sys/class/hwmon/hwmonN,
+        // which is enumeration-order dependent.
+        "temperature": {
+            "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+            "input-filename": "temp1_input"
+        }
+    }
+]
