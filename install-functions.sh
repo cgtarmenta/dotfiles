@@ -63,11 +63,18 @@ install_packages() {
     
     log_info "Updating system..."
     yay -Suy --noconfirm
+
+    # Handle swaylock-effects vs swaylock-effects-git conflict on existing systems
+    if pacman -Q swaylock-effects-git &>/dev/null; then
+        log_info "Removing conflicting swaylock-effects-git package..."
+        yay -R --noconfirm swaylock-effects-git || \
+            log_warning "Failed to remove swaylock-effects-git; installer may still hit conflicts"
+    fi
     
     log_info "Installing Hyprland and dependencies..."
     yay -S --noconfirm \
         hyprland warp-terminal waybar \
-        swaybg swaylock-effects swaylock-fancy rofi-wayland wlogout swaync thunar \
+        swaybg rofi-wayland wlogout swaync thunar \
         swayidle ttf-jetbrains-mono-nerd polkit-gnome starship \
         swappy grim slurp pamixer brightnessctl gvfs \
         bluez bluez-utils blueman nwg-look xfce4-settings \
@@ -78,7 +85,9 @@ install_packages() {
         telegram-desktop discord steam spotify-launcher chromium tailscale fzf btop
     
     if [ $? -eq 0 ]; then
-        log_success "Core packages ins        # Enable bluetooth service
+        log_success "Core packages installed successfully"
+
+        # Enable bluetooth service
         log_info "Enabling Bluetooth service..."
         sudo systemctl enable --now bluetooth.service
 

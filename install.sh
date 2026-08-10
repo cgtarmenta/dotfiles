@@ -31,8 +31,14 @@ fi
 ### Install all of the above pacakges ####
 read -n1 -rep 'Would you like to install the packages? (y,n)' INST
 if [[ $INST == "Y" || $INST == "y" ]]; then
+    # Remove swaylock-effects-git if present to avoid conflicts
+    if pacman -Q swaylock-effects-git &>/dev/null; then
+        echo -e "Removing conflicting swaylock-effects-git package...\n"
+        yay -R --noconfirm swaylock-effects-git || echo -e "Warning: failed to remove swaylock-effects-git; install may still fail.\n"
+    fi
+
     yay -S --noconfirm hyprland kitty waybar \
-    swaybg swaylock-effects swaylock-fancy rofi-wayland wlogout swaync thunar \
+    swaybg rofi-wayland wlogout swaync thunar \
     swayidle ttf-jetbrains-mono-nerd polkit-gnome starship \
     swappy grim slurp pamixer brightnessctl gvfs \
     bluez bluez-utils blueman nwg-look xfce4-settings \
