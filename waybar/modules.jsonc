@@ -140,8 +140,10 @@
     "temperature": {
         "thermal-zone": 7,
         "interval": 5,
-        "format": "{icon}{temperatureC}°C",
-        "format-icons": [" "],
+        "format": "{icon}  {temperatureC}°C",
+        // Graduated thermometer icons: fill rises with temperature instead of
+        // a single static glyph. Ported from the ROG Flow X13's live config.
+        "format-icons": ["", "", ""],
         "format-alt-click": "click-right",
         "critical-threshold": 80,
         "format-critical": " {temperatureC}°C",
