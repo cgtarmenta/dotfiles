@@ -64,17 +64,24 @@ install_packages() {
     log_info "Updating system..."
     yay -Suy --noconfirm
     
+    # One bad package name aborts this whole call and leaves the machine looking
+    # deployed but missing everything — that is exactly how the laptop ended up
+    # without a launcher: the list said "rofi-wayland", which no longer exists
+    # (upstream merged Wayland support into plain rofi >= 2.0 and the fork was
+    # dropped from the repos). Every name below is referenced by hyprland.lua or
+    # waybar/modules.jsonc; keep the two in sync when adding a bind or a widget.
     log_info "Installing Hyprland and dependencies..."
-    yay -S --noconfirm \
+    yay -S --needed --noconfirm \
         hyprland warp-terminal waybar \
-        swaybg swaylock-effects swaylock-fancy rofi-wayland wlogout swaync nautilus \
-        swayidle ttf-jetbrains-mono-nerd polkit-gnome starship \
+        swaybg swaylock-effects swaylock-fancy rofi wlogout swaync nautilus \
+        swayidle hypridle uwsm ttf-jetbrains-mono-nerd polkit-gnome starship \
         satty grim slurp pamixer brightnessctl gvfs \
         bluez bluez-utils blueman nwg-look xfce4-settings \
         gnome-themes-extra dracula-gtk-theme dracula-icons-git xdg-desktop-portal-hyprland \
         wl-gammarelay hyfetch power-profiles-daemon sddm \
         ttf-fira-code ttf-font-awesome wol jq playerctl wl-clipboard \
-        telegram-desktop discord steam spotify-launcher chromium tailscale fzf btop \
+        telegram-desktop whatsdesk-bin slack-desktop-wayland clickup-desktop discord steam \
+        spotify-launcher chromium tailscale fzf btop \
         pamac-aur
     
     if [ $? -eq 0 ]; then
