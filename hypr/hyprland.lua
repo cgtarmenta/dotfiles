@@ -67,7 +67,13 @@ end)
 -- live: swaybg never launched on first login, only after a manual
 -- `hyprctl reload`) — so this has to be wired into both events explicitly.
 local function runOnEveryConfigLoad()
-    hl.exec_cmd("swaybg -m fill -i ~/.config/hypr/moon-over-mondstat.jpg")
+    -- swaybg has no IPC and won't replace itself, so re-running it on every
+    -- reload used to just stack another copy on top of the live one. Start the
+    -- new instance, give it half a second to paint, then reap anything older
+    -- than a second: the wallpaper never blinks and only one process survives.
+    -- swaync and wl-gammarelay need no such handling — a second instance fails
+    -- to acquire its D-Bus name and exits on its own.
+    hl.exec_cmd("swaybg -m fill -i ~/.config/hypr/moon-over-mondstat.jpg & sleep 0.5; killall -o 1s swaybg")
     hl.exec_cmd("swaync")
     hl.exec_cmd("wl-gammarelay")
 end
