@@ -93,6 +93,7 @@ tooltip {
 #custom-github,
 #custom-media,
 #power-profiles-daemon,
+#custom-ac_idle_mode,
 #temperature,
 #battery,
 #backlight,
@@ -254,6 +255,23 @@ window#waybar.empty #window {
 
 #power-profiles-daemon.performance{
     color: #e8db92;
+}
+
+#custom-ac_idle_mode {
+    border-radius: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 7px;
+}
+
+#custom-ac_idle_mode.active {
+    color: #a6e3a1;
+}
+
+#custom-ac_idle_mode.armed {
+    color: #e8db92;
+}
+
+#custom-ac_idle_mode.inactive {
+    color: #eba0ac;
 }
 
 #custom-wl-gammarelay-temperature {

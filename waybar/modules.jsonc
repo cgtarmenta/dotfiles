@@ -189,6 +189,21 @@
         "tooltip-format": "GPU Mode: {}"
     },
 
+    "custom/ac_idle_mode": {
+        // Laptop-only AC no-idle toggle. Same supergfxctl gate as
+        // custom/asus_gpu_mode keeps it off the desktop bar entirely.
+        // hypridle (started laptop-only from hyprland.lua) routes its
+        // lock/dpms/suspend timeouts through this script, which skips idle
+        // actions while on AC power so the machine stays awake when plugged in.
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/hypr/scripts/ac-power-idle-toggle.sh status-json",
+        "exec-if": "command -v supergfxctl",
+        "interval": 2,
+        "on-click": "~/.config/hypr/scripts/ac-power-idle-toggle.sh toggle",
+        "tooltip": true
+    },
+
     "custom/power_btn": {
         "format" : "{icon}",
         "format-icons": [""],

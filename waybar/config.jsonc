@@ -45,6 +45,7 @@
 			"temperature",
 			"battery",
 			"power-profiles-daemon",
+			"custom/ac_idle_mode",
 			"custom/wl-gammarelay-temperature",
 			"backlight"
 		]
