@@ -56,12 +56,19 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("tailscale up")     -- Connect to Tailscale VPN
 end)
 
--- plain exec equivalent: also re-runs on every config reload
-hl.on("config.reloaded", function()
+-- plain exec equivalent: runs at startup AND re-runs on every config reload.
+-- NOTE: unlike the old hyprlang `exec = ...`, the "config.reloaded" event
+-- does NOT fire on the initial config load at compositor start (confirmed
+-- live: swaybg never launched on first login, only after a manual
+-- `hyprctl reload`) — so this has to be wired into both events explicitly.
+local function runOnEveryConfigLoad()
     hl.exec_cmd("swaybg -m fill -i ~/.config/hypr/moon-over-mondstat.jpg")
     hl.exec_cmd("swaync")
     hl.exec_cmd("wl-gammarelay")
-end)
+end
+
+hl.on("hyprland.start", runOnEveryConfigLoad)
+hl.on("config.reloaded", runOnEveryConfigLoad)
 
 -----------------------
 ---- LOOK AND FEEL ----
