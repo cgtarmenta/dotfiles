@@ -27,24 +27,66 @@ log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
-# Check for yay
-check_yay() {
-    if command -v yay &> /dev/null; then
-        log_success "yay is installed"
+# Check for shelly — CachyOS's package manager, and the one this repo targets.
+# It covers repositories, the AUR, Flatpaks and AppImages in one tool and
+# elevates on its own, so nothing here calls sudo, pacman or yay directly.
+check_shelly() {
+    if command -v shelly &> /dev/null; then
+        log_success "shelly is installed"
         return 0
     else
-        log_error "yay is not installed. Please install yay first."
-        log_info "Visit: https://github.com/Jguer/yay"
+        log_error "shelly is not installed. Please install shelly first."
+        log_info "On CachyOS: sudo pacman -S shelly"
+        log_info "Upstream: https://github.com/Seafoam-Labs/Shelly-ALPM"
         return 1
     fi
+}
+
+# Shelly deliberately does not auto-route a bare package name between the
+# repositories and the AUR when it isn't being driven interactively, so the two
+# lists below stay separate and go to `install standard` / `install aur`.
+#
+# It also has no --needed. `search standard --installed` can't stand in for one:
+# it is a fuzzy match that exits 0 whether or not the package is there. So filter
+# against the local database explicitly, otherwise every deploy re-run reinstalls
+# several hundred megabytes.
+#
+# Match on Provides as well as Name: a request can already be satisfied by a
+# different package. The laptop runs waybar-git, which provides waybar — matching
+# names alone would try to install waybar over it and hit the conflict.
+not_installed() {
+    local satisfied
+    satisfied="$(shelly list standard --json 2>/dev/null |
+        jq -r '.[] | .Name, (.Provides[]? | split("=")[0])')" || return 1
+    local pkg
+    for pkg in "$@"; do
+        grep -qxF -- "$pkg" <<< "$satisfied" || printf '%s\n' "$pkg"
+    done
+}
+
+# Install only the missing members of a package list. $1 is the shelly type
+# ("standard" or "aur"); the rest are package names. A fully-satisfied list is a
+# no-op, not an error.
+install_missing() {
+    local type="$1"; shift
+    local missing
+    mapfile -t missing < <(not_installed "$@")
+
+    if [ ${#missing[@]} -eq 0 ]; then
+        log_info "All ${type} packages already installed"
+        return 0
+    fi
+
+    log_info "Installing ${#missing[@]} ${type} package(s): ${missing[*]}"
+    shelly install "$type" --no-confirm "${missing[@]}"
 }
 
 # Function 1: Full Installation
 full_installation() {
     log_info "Starting full installation..."
     
-    check_yay || return 1
-    
+    check_shelly || return 1
+
     install_packages || return 1
     deploy_configs || return 1
     configure_wifi || return 1
@@ -59,31 +101,41 @@ full_installation() {
 install_packages() {
     log_info "Installing core packages..."
     
-    check_yay || return 1
-    
+    check_shelly || return 1
+
     log_info "Updating system..."
-    yay -Suy --noconfirm
-    
-    # One bad package name aborts this whole call and leaves the machine looking
-    # deployed but missing everything — that is exactly how the laptop ended up
-    # without a launcher: the list said "rofi-wayland", which no longer exists
-    # (upstream merged Wayland support into plain rofi >= 2.0 and the fork was
-    # dropped from the repos). Every name below is referenced by hyprland.lua or
-    # waybar/modules.jsonc; keep the two in sync when adding a bind or a widget.
+    shelly upgrade all --no-flatpak --no-appimage --no-confirm
+
+    # Every name below is referenced by a bind in hyprland.lua or a widget in
+    # waybar/modules.jsonc — keep the two in sync when adding either. Names are
+    # split by source because shelly won't guess repo-vs-AUR non-interactively.
+    #
+    # "rofi", not "rofi-wayland": upstream merged Wayland support into rofi 2.0
+    # and the old name now only resolves through rofi's Provides/Replaces
+    # compatibility entry, which will not last forever.
     log_info "Installing Hyprland and dependencies..."
-    yay -S --needed --noconfirm \
-        hyprland warp-terminal waybar \
-        swaybg swaylock-effects swaylock-fancy rofi wlogout swaync nautilus \
-        swayidle hypridle uwsm ttf-jetbrains-mono-nerd polkit-gnome starship \
-        satty grim slurp pamixer brightnessctl gvfs \
-        bluez bluez-utils blueman nwg-look xfce4-settings \
-        gnome-themes-extra dracula-gtk-theme dracula-icons-git xdg-desktop-portal-hyprland \
-        wl-gammarelay hyfetch power-profiles-daemon sddm \
-        ttf-fira-code ttf-font-awesome wol jq playerctl wl-clipboard \
-        telegram-desktop whatsdesk-bin slack-desktop-wayland clickup-desktop discord steam \
-        spotify-launcher chromium tailscale fzf btop \
-        pamac-aur
-    
+    local repo_packages=(
+        hyprland warp-terminal waybar
+        swaybg swaylock-effects swaylock-fancy rofi wlogout swaync nautilus
+        swayidle hypridle uwsm ttf-jetbrains-mono-nerd polkit-gnome starship
+        satty grim slurp pamixer brightnessctl gvfs
+        bluez bluez-utils blueman nwg-look xfce4-settings
+        gnome-themes-extra dracula-icons-git xdg-desktop-portal-hyprland
+        hyfetch power-profiles-daemon sddm
+        ttf-fira-code ttf-font-awesome wol jq playerctl wl-clipboard
+        telegram-desktop discord steam spotify-launcher chromium tailscale
+        fzf btop shelly
+    )
+    # clickup-desktop rather than the better-known clickup, whose PKGBUILD
+    # carries a sha256 upstream has since invalidated; both give /usr/bin/clickup.
+    local aur_packages=(
+        dracula-gtk-theme wl-gammarelay
+        whatsdesk-bin slack-desktop-wayland clickup-desktop
+    )
+
+    install_missing standard "${repo_packages[@]}" &&
+    install_missing aur "${aur_packages[@]}"
+
     if [ $? -eq 0 ]; then
         log_success "Core packages installed successfully"
         
@@ -93,7 +145,7 @@ install_packages() {
         
         # Clean out other portals
         log_info "Removing conflicting xdg portals..."
-        yay -R --noconfirm xdg-desktop-portal-gnome xdg-desktop-portal-gtk 2>/dev/null
+        shelly remove standard --no-confirm xdg-desktop-portal-gnome xdg-desktop-portal-gtk 2>/dev/null
         
         log_success "Package installation completed"
         return 0
@@ -180,7 +232,7 @@ setup_waybar_modules() {
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         log_info "Installing wol package..."
-        yay -S --noconfirm wol
+        install_missing standard wol
         
         read -p "Enter target IP Address: " ip_address
         read -p "Enter target MAC Address: " mac_address
@@ -196,7 +248,7 @@ setup_waybar_modules() {
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         log_info "Installing Tailscale..."
-        yay -S --noconfirm tailscale
+        install_missing standard tailscale
         
         read -p "Enter hostname: " hostname
         echo "$hostname" > "$HOME/.config/.secrets/hostname.txt"
@@ -253,23 +305,23 @@ install_optional() {
         
         # IntelliJ IDEA
         log_info "Installing IntelliJ IDEA Community Edition..."
-        yay -S --noconfirm intellij-idea-community-edition || failed_packages+=("intellij-idea-community-edition")
+        install_missing standard intellij-idea-community-edition || failed_packages+=("intellij-idea-community-edition")
         
         # Slack (prefer Wayland version if available)
-        if pacman -Qq slack-desktop-wayland &>/dev/null; then
+        if [ -z "$(not_installed slack-desktop-wayland)" ]; then
             log_info "Slack Wayland already installed, skipping..."
         else
             log_info "Installing Slack for Wayland..."
-            yay -S --noconfirm slack-desktop-wayland || failed_packages+=("slack-desktop-wayland")
+            install_missing aur slack-desktop-wayland || failed_packages+=("slack-desktop-wayland")
         fi
         
         # Teams
         log_info "Installing Teams for Linux..."
-        yay -S --noconfirm teams-for-linux || failed_packages+=("teams-for-linux")
+        install_missing standard teams-for-linux || failed_packages+=("teams-for-linux")
         
         # WhatsApp
         log_info "Installing WhatsApp for Linux..."
-        yay -S --noconfirm whatsapp-for-linux || failed_packages+=("whatsapp-for-linux")
+        install_missing aur whatsapp-for-linux || failed_packages+=("whatsapp-for-linux")
         
         if [ ${#failed_packages[@]} -eq 0 ]; then
             log_success "Optional programs installed successfully"

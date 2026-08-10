@@ -13,13 +13,14 @@ use ratatui::{
 };
 use std::io;
 use ui::{MenuState, render_menu};
-use utils::{check_yay, run_script_function};
+use utils::{check_shelly, run_script_function};
 
 fn main() -> anyhow::Result<()> {
-    // Check for yay
-    if !check_yay() {
-        eprintln!("Error: yay is not installed. Please install yay first.");
-        eprintln!("Visit: https://github.com/Jguer/yay");
+    // Check for shelly
+    if !check_shelly() {
+        eprintln!("Error: shelly is not installed. Please install shelly first.");
+        eprintln!("On CachyOS: sudo pacman -S shelly");
+        eprintln!("Upstream: https://github.com/Seafoam-Labs/Shelly-ALPM");
         std::process::exit(1);
     }
 

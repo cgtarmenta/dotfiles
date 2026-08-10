@@ -30,9 +30,12 @@ pub fn run_script_function(function_name: &str) -> Result<()> {
     Ok(())
 }
 
-pub fn check_yay() -> bool {
+/// Shelly is CachyOS's package manager and the only one this repo drives:
+/// repositories, the AUR, Flatpaks and AppImages through one tool, elevating
+/// itself where it needs to.
+pub fn check_shelly() -> bool {
     Command::new("which")
-        .arg("yay")
+        .arg("shelly")
         .output()
         .map(|o| o.status.success())
         .unwrap_or(false)
