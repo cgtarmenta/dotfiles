@@ -7,12 +7,11 @@
 //                             laptop. Room for everything, all ten workspace
 //                             numbers pinned.
 //   "DP-4"                  → desktop secondary bar: the Kamvas Pro 13 tablet
-//                             on MUTOMBO. Same content as the full bar, minus
-//                             pinned workspaces — at this size, ten always-
-//                             visible numbers overlap each other.
+//                             on MUTOMBO. No pinned workspaces (ten always-
+//                             visible numbers overlap at this size), no
+//                             memory/disk readouts, no raw IP in "network".
 //   "eDP-2"                 → compact bar: the ROG Flow X13's internal
-//                             1920x1200 panel. No persistent workspace
-//                             numbers, no RAM/disk readouts either.
+//                             1920x1200 panel. Same trims as DP-4 above.
 //
 // The trailing "*" on the exclusion entry is required, not decorative: per
 // `man 5 waybar`, an "output" array of only exclusions matches nothing on its
@@ -99,9 +98,11 @@
             "~/.config/waybar/modules.jsonc"
         ],
 
-        // Same modules as the full bar, but no "persistent-workspaces"
-        // override below: without it Waybar shows only workspaces actually
-        // in use, which is what fits without the numbers overlapping.
+        // No "persistent-workspaces" override: without it Waybar shows only
+        // workspaces actually in use, which is what fits without the numbers
+        // overlapping. Same width-saving trims as the laptop's compact bar:
+        // "memory" and "custom/storage" dropped, and "network" below skips
+        // printing the raw IP.
         "modules-left": [
             "custom/rofi",
             "hyprland/workspaces",
@@ -114,8 +115,6 @@
         ],
         "modules-right": [
             "custom/media",
-            "custom/storage",
-            "memory",
             "cpu",
             "group/hardware",
             "custom/asus_gpu_mode",
@@ -133,6 +132,12 @@
         // Same physical desktop as the full bar, same CPU sensor.
         "temperature": {
             "thermal-zone": 7
+        },
+
+        // Icon only on ethernet, no raw IP/CIDR text — same trim as the
+        // laptop's compact bar below. The full bar keeps the address.
+        "network": {
+            "format-ethernet": " "
         }
     },
 
@@ -188,6 +193,12 @@
         "temperature": {
             "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
             "input-filename": "temp1_input"
+        },
+
+        // Icon only on ethernet, no raw IP/CIDR text — same trim as the
+        // desktop secondary bar above. The full bar keeps the address.
+        "network": {
+            "format-ethernet": " "
         }
     }
 ]
