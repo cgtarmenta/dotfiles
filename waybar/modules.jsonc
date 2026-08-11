@@ -329,13 +329,21 @@
     },
 
     "custom/wl-gammarelay-temperature": {
+        // wl-gammarelay-rs (not the plain wl-gammarelay this replaced)
+        // exposes each output separately over D-Bus, so a desktop with
+        // multiple monitors can adjust one without dragging the other along
+        // -- see gammarelay-temperature.sh. exec/on-scroll below target "/",
+        // the global average across every output: correct as-is for a
+        // single-display machine, and each multi-monitor bar in config.jsonc
+        // overrides these three keys to name its own output.
         "format": "{} {icon}",
         "format-alt": "{icon}", 
         "format-icons": [""],
-        "exec": "wl-gammarelay --subscribe Temperature",
-        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
-        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100",
-        "tooltip-format": "Screen Temperature: {} K",
+        "return-type": "json",
+        "interval": 2,
+        "exec": "~/.config/waybar/scripts/gammarelay-temperature.sh get /",
+        "on-scroll-up": "~/.config/waybar/scripts/gammarelay-temperature.sh inc /",
+        "on-scroll-down": "~/.config/waybar/scripts/gammarelay-temperature.sh dec /",
         "tooltip": true
     },
 

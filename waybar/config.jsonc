@@ -100,6 +100,14 @@
             "exec": "~/.config/waybar/scripts/monitor-brightness.sh get --sn 107NTUW5C662",
             "on-scroll-up": "~/.config/waybar/scripts/monitor-brightness.sh inc --sn 107NTUW5C662",
             "on-scroll-down": "~/.config/waybar/scripts/monitor-brightness.sh dec --sn 107NTUW5C662"
+        },
+
+        // Scoped to this monitor's own wl-gammarelay-rs output object, so
+        // adjusting color temperature here doesn't drag DP-4 along with it.
+        "custom/wl-gammarelay-temperature": {
+            "exec": "~/.config/waybar/scripts/gammarelay-temperature.sh get /outputs/DP_5",
+            "on-scroll-up": "~/.config/waybar/scripts/gammarelay-temperature.sh inc /outputs/DP_5",
+            "on-scroll-down": "~/.config/waybar/scripts/gammarelay-temperature.sh dec /outputs/DP_5"
         }
     },
 
@@ -177,6 +185,14 @@
             "exec": "~/.config/waybar/scripts/monitor-brightness.sh get --model \"Kamvas Pro 13\"",
             "on-scroll-up": "~/.config/waybar/scripts/monitor-brightness.sh inc --model \"Kamvas Pro 13\"",
             "on-scroll-down": "~/.config/waybar/scripts/monitor-brightness.sh dec --model \"Kamvas Pro 13\""
+        },
+
+        // Scoped to this monitor's own wl-gammarelay-rs output object, so
+        // adjusting color temperature here doesn't drag DP-5 along with it.
+        "custom/wl-gammarelay-temperature": {
+            "exec": "~/.config/waybar/scripts/gammarelay-temperature.sh get /outputs/DP_4",
+            "on-scroll-up": "~/.config/waybar/scripts/gammarelay-temperature.sh inc /outputs/DP_4",
+            "on-scroll-down": "~/.config/waybar/scripts/gammarelay-temperature.sh dec /outputs/DP_4"
         }
     },
 

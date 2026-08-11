@@ -71,11 +71,15 @@ local function runOnEveryConfigLoad()
     -- reload used to just stack another copy on top of the live one. Start the
     -- new instance, give it half a second to paint, then reap anything older
     -- than a second: the wallpaper never blinks and only one process survives.
-    -- swaync and wl-gammarelay need no such handling — a second instance fails
-    -- to acquire its D-Bus name and exits on its own.
+    -- swaync and wl-gammarelay-rs need no such handling — a second instance
+    -- fails to acquire its D-Bus name and exits on its own.
     hl.exec_cmd("swaybg -m fill -i ~/.config/hypr/moon-over-mondstat.jpg & sleep 0.5; killall -o 1s swaybg")
     hl.exec_cmd("swaync")
-    hl.exec_cmd("wl-gammarelay")
+    -- wl-gammarelay-rs, not plain wl-gammarelay: exposes each output
+    -- separately over D-Bus (/outputs/<NAME>), so a multi-monitor desktop
+    -- can adjust one screen's color temperature/brightness without
+    -- dragging every other connected monitor along with it.
+    hl.exec_cmd("wl-gammarelay-rs")
 end
 
 hl.on("hyprland.start", runOnEveryConfigLoad)
