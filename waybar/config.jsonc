@@ -1,11 +1,18 @@
-// Two bars, picked by the output they land on — no hostname detection needed,
-// because Waybar only instantiates a bar whose "output" matches a monitor that
-// is actually connected:
+// Three bars, picked by the output they land on — no hostname detection
+// needed, because Waybar only instantiates a bar whose "output" matches a
+// monitor that is actually connected:
 //
-//   "!eDP-2", "*"  → full bar: the desktop's ultrawide, or any external screen
-//                    plugged into the laptop. Room for everything.
-//   "eDP-2"        → compact bar: the ROG Flow X13's internal 1920x1200 panel.
-//                    No persistent workspace numbers, no RAM/disk readouts.
+//   "!eDP-2", "!DP-4", "*"  → full bar: the desktop's ultrawide (or any other
+//                             external screen), or one plugged into the
+//                             laptop. Room for everything, all ten workspace
+//                             numbers pinned.
+//   "DP-4"                  → desktop secondary bar: the Kamvas Pro 13 tablet
+//                             on MUTOMBO. Same content as the full bar, minus
+//                             pinned workspaces — at this size, ten always-
+//                             visible numbers overlap each other.
+//   "eDP-2"                 → compact bar: the ROG Flow X13's internal
+//                             1920x1200 panel. No persistent workspace
+//                             numbers, no RAM/disk readouts either.
 //
 // The trailing "*" on the exclusion entry is required, not decorative: per
 // `man 5 waybar`, an "output" array of only exclusions matches nothing on its
@@ -27,7 +34,7 @@
         "exclusive": true,
         "passthrough": false,
         "gtk-layer-shell": true,
-        "output": ["!eDP-2", "*"],
+        "output": ["!eDP-2", "!DP-4", "*"],
 
         "include": [
             "~/.config/waybar/modules.jsonc"
@@ -73,6 +80,57 @@
         },
 
         // Desktop CPU sensor.
+        "temperature": {
+            "thermal-zone": 7
+        }
+    },
+
+    {
+        // ── Desktop secondary bar (Kamvas Pro 13 tablet on MUTOMBO) ──
+        "layer": "top",
+        "position": "top",
+        "mod": "dock",
+        "exclusive": true,
+        "passthrough": false,
+        "gtk-layer-shell": true,
+        "output": ["DP-4"],
+
+        "include": [
+            "~/.config/waybar/modules.jsonc"
+        ],
+
+        // Same modules as the full bar, but no "persistent-workspaces"
+        // override below: without it Waybar shows only workspaces actually
+        // in use, which is what fits without the numbers overlapping.
+        "modules-left": [
+            "custom/rofi",
+            "hyprland/workspaces",
+            "temperature",
+            "hyprland/window"
+        ],
+        "modules-center": [
+            "clock",
+            "custom/weather"
+        ],
+        "modules-right": [
+            "custom/media",
+            "custom/storage",
+            "memory",
+            "cpu",
+            "group/hardware",
+            "custom/asus_gpu_mode",
+            "group/audio",
+            "network",
+            "tray",
+            "group/exit",
+            "custom/screenshot",
+            "custom/wol",
+            "custom/updates",
+            "custom/github",
+            "custom/swaync"
+        ],
+
+        // Same physical desktop as the full bar, same CPU sensor.
         "temperature": {
             "thermal-zone": 7
         }
