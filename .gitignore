@@ -4,3 +4,7 @@
 # Temporary file, for testing configs
 *temp/
 .idea
+
+# Tool-specific agent state (worktrees, local session data). Shared skill
+# content lives in .agents/ instead, which IS tracked.
+.claude/
