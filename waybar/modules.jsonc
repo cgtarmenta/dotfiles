@@ -223,6 +223,19 @@
         "tooltip-format": "GPU Mode: {}"
     },
 
+    "custom/monitor_brightness": {
+        // Real hardware backlight for external monitors, via DDC/CI
+        // (VCP 10) instead of the Linux "backlight" sysfs class, which
+        // only covers internally-wired panels. exec/on-scroll-* are left
+        // unset here on purpose: config.jsonc overrides them per bar with
+        // the right --model/--sn selector for whichever monitor that bar
+        // lives on, exactly like "temperature" already does for its sensor.
+        "format": "󰃟 {}",
+        "return-type": "json",
+        "interval": 10,
+        "tooltip": true
+    },
+
     "custom/ac_idle_mode": {
         // Laptop-only AC no-idle toggle. Same supergfxctl gate as
         // custom/asus_gpu_mode keeps it off the desktop bar entirely.
@@ -316,13 +329,21 @@
     },
 
     "custom/wl-gammarelay-temperature": {
+        // wl-gammarelay-rs (not the plain wl-gammarelay this replaced)
+        // exposes each output separately over D-Bus, so a desktop with
+        // multiple monitors can adjust one without dragging the other along
+        // -- see gammarelay-temperature.sh. exec/on-scroll below target "/",
+        // the global average across every output: correct as-is for a
+        // single-display machine, and each multi-monitor bar in config.jsonc
+        // overrides these three keys to name its own output.
         "format": "{} {icon}",
         "format-alt": "{icon}", 
         "format-icons": [""],
-        "exec": "wl-gammarelay --subscribe Temperature",
-        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
-        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100",
-        "tooltip-format": "Screen Temperature: {} K",
+        "return-type": "json",
+        "interval": 2,
+        "exec": "~/.config/waybar/scripts/gammarelay-temperature.sh get /",
+        "on-scroll-up": "~/.config/waybar/scripts/gammarelay-temperature.sh inc /",
+        "on-scroll-down": "~/.config/waybar/scripts/gammarelay-temperature.sh dec /",
         "tooltip": true
     },
 
