@@ -23,7 +23,7 @@ You can install either the english (```main-en```) or italian (```main```) toolt
 This repository includes an interactive TUI installer located in the `installer/` folder. It is a Rust application (`dotfiles-installer`) that provides a menu to run individual installation steps or a full installation. The installer calls functions from `install-functions.sh` (no legacy `install.sh`).
 
 > [!IMPORTANT]
-> The TUI installer uses `cargo` and `yay`. If you do not have them installed, you can install them with the commands below.
+> The TUI installer uses `cargo` and `shelly`. If you do not have them installed, you can install them with the commands below.
 
 ### Install Rust toolchain (rustup) – if needed
 
@@ -35,18 +35,22 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source "$HOME/.cargo/env"
 ```
 
-### Install yay – if needed
+### Install shelly – if needed
+
+[Shelly](https://github.com/Seafoam-Labs/Shelly-ALPM) is CachyOS's package manager and
+the only one this repo drives — it covers the repositories, the AUR, Flatpaks and
+AppImages through one tool and elevates itself where it needs to, so nothing here
+calls `sudo`, `pacman` or `yay` directly. On CachyOS it ships in the `cachyos` repo:
 
 ```bash
-# Install build tools
-sudo pacman -S --needed git base-devel
-
-# Clone and build yay from AUR
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ..
+# Install build tools and shelly
+sudo pacman -S --needed git base-devel shelly
 ```
+
+Two quirks worth knowing before reading the install scripts: shelly does not guess
+between the repositories and the AUR when it isn't being driven interactively
+(hence `shelly install standard` vs `shelly install aur`), and it has no `--needed`,
+so the scripts filter package lists against the local database themselves.
 
 ### Run the TUI installer
 
@@ -64,7 +68,7 @@ Below a table of each package that should be installed, and its purpose. If you 
 
 ### Dependencies
 
-#### Pacman packages
+#### Repository packages
 
 | Package                   | Description |
 | ------------------------- | ----------- |
@@ -72,10 +76,11 @@ Below a table of each package that should be installed, and its purpose. If you 
 || `warp-terminal`           | Default terminal |
 | `waybar`                  | Customizable Wayland bar |
 | `swaybg`                  | Used to set a desktop background image |
-| `rofi-wayland`            | A window switcher, application launcher and dmenu replacement |
+| `rofi`                    | A window switcher, application launcher and dmenu replacement (2.0 absorbed the old `rofi-wayland` fork) |
 | `swaync`                  | Graphical notification daemon |
 || `nautilus`                | Graphical file manager (GNOME Files) |
-|| `pamac-aur`               | Graphical package manager with AUR support |
+|| `shelly`                  | Package manager for repos, AUR, Flatpak and AppImage; `shelly-ui` is its graphical front end |
+|| `shelly-flatpak-backend`  | Shelly's Flatpak backend — without it `shelly upgrade all` reports no Flatpak support and fails as a whole |
 | `swayidle`                | Idle management deamon for Wayland |
 | `ttf-jetbrains-mono-nerd` | Some nerd fonts for icons and overall look |
 | `polkit-gnome`            | Graphical superuser, needed for some applications |
@@ -126,7 +131,8 @@ Below a table of each package that should be installed, and its purpose. If you 
 || `sddm-eucalyptus-drop`    | Sddm theme    |
 
 ```sh
-yay -S wlogout swaylock-effects swaylock-fancy dracula-gtk-theme dracula-icons-git sddm-eucalyptus-drop
+shelly install standard wlogout swaylock-effects swaylock-fancy dracula-icons-git
+shelly install aur dracula-gtk-theme sddm-eucalyptus-drop
 ```
 
 #### Optional Development & Communication Apps
@@ -138,7 +144,8 @@ yay -S wlogout swaylock-effects swaylock-fancy dracula-gtk-theme dracula-icons-g
 || `whatsapp-for-linux`      | Unofficial WhatsApp Desktop client |
 
 ```sh
-yay -S intellij-idea-ultimate-edition slack-desktop teams-for-linux whatsapp-for-linux
+shelly install standard intellij-idea-ultimate-edition teams-for-linux
+shelly install aur slack-desktop-wayland whatsapp-for-linux
 ```
 Or your AUR helper of choice. 
 
@@ -157,7 +164,8 @@ Here is a list of useful and funny packages:
 | `plasma-browser-integration`<sup>AUR</sup> | MPRIS support for browsers (enables YouTube Music in waybar) |
 
 ```sh
-yay -S cowsay fortune-mod pipes.sh imagemagick inkscape
+shelly install standard cowsay fortune-mod imagemagick inkscape
+shelly install aur pipes.sh
 ```
 
 # Overview
@@ -277,5 +285,5 @@ I tried to base it off this [color scheme](https://color.adobe.com/it/olor-Theme
 
 I use [squared theme](https://www.gnome-look.org/p/2206255) for gtk, and [ant-dark](https://store.kde.org/p/1640981/) icons theme. To add themes and icon themes download and unzip theme respectively in ```~/.themes``` and ```~/.local/share/icons```, use this last directory to store cursor icons (i use my oshi [Rin Penrose](https://www.gnome-look.org/p/2260618)'s)
 
-For `sddm` I use the [eucalyptus-drop](https://gitlab.com/Matt.Jolly/sddm-eucalyptus-drop) theme, it is available on the AUR and can be installed via your AUR helper (for example `yay -S sddm-eucalyptus-drop`). 
+For `sddm` I use the [eucalyptus-drop](https://gitlab.com/Matt.Jolly/sddm-eucalyptus-drop) theme, it is available on the AUR and can be installed with `shelly install aur sddm-eucalyptus-drop`. 
 

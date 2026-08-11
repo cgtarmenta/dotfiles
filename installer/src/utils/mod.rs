@@ -1,3 +1,3 @@
 pub mod command;
 
-pub use command::{check_yay, run_script_function};
+pub use command::{check_shelly, run_script_function};

@@ -28,13 +28,13 @@ The repository is designed for fresh installations and uses a Rust TUI installer
 git clone https://github.com/00Darxk/dotfiles.git
 cd dotfiles
 
-# Build/run TUI installer (requires rustup + yay)
+# Build/run TUI installer (requires rustup + shelly)
 cd installer
 cargo run --release
 ```
 
 The TUI handles:
-- Package installation via yay
+- Package installation via shelly (repos + AUR; it elevates itself, so no sudo here)
 - Config deployment to ~/.config (hypr, waybar, kitty, pipewire, wireplumber, etc.)
 - Optional WoL/Tailscale module setup
 - Starship shell configuration
@@ -200,7 +200,7 @@ No automated tests. Validation is manual:
 
 - **No Error Checking**: The install script doesn't backup existing configs or validate steps
 - **Fresh Install Target**: Designed for clean systems, not incremental updates
-- **Dependencies**: Requires yay (AUR helper) pre-installed
+- **Dependencies**: Requires shelly (CachyOS's package manager) pre-installed — `sudo pacman -S shelly`
 - **Attribution**: Config heavily based on SolDoesTech and klpod0s repositories
 - **Theming**: Uses Dracula GTK theme and icons, Squared GTK theme available as alternative
 

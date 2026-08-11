@@ -38,13 +38,13 @@ Fixed upstream in Waybar's PR #5013, merged to master, not yet in a stable relea
 as of 2026-08-10. Same fix needed on the laptop:
 
 ```bash
-yay -S waybar-git --noconfirm
-# if pacman balks on the waybar/waybar-git conflict instead of resolving it:
-sudo pacman -R waybar --noconfirm
-sudo pacman -U ~/.cache/yay/waybar-git/waybar-git-*.pkg.tar.zst --noconfirm
+shelly install aur waybar-git --no-confirm
+# if it balks on the waybar/waybar-git conflict instead of resolving it:
+shelly remove standard waybar --no-confirm
+shelly install aur waybar-git --no-confirm
 ```
 
-- [ ] Confirm: `pacman -Q waybar-git` shows the installed version.
+- [ ] Confirm: `shelly search standard --installed --detail waybar-git` shows the installed version.
 
 ## 3. Deploy `main`
 

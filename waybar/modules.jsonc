@@ -49,12 +49,38 @@
             "class<MuPDF>": " ",
             "title<Aggiornamenti>": " ",
             "title<Pacchetti Installati>": " "
-	},
-        "persistent-workspaces": {
-            "*": 10,
-            "HDMI-A-1": [11, 12],
-            "DP-1": [11,12]
-        }
+	}
+        // "persistent-workspaces" lives in config.jsonc: the full bar pins all
+        // ten numbers, the laptop's compact bar shows only the ones in use.
+    },
+
+    // Groups are module definitions too, so both bars share them from here and
+    // only name "group/<...>" in their own modules-* lists.
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "battery",
+            "power-profiles-daemon",
+            "custom/ac_idle_mode",
+            "custom/wl-gammarelay-temperature",
+            "backlight"
+        ]
+    },
+
+    "group/audio": {
+        "orientation": "horizontal",
+        "modules": [
+            "wireplumber",
+            "pulseaudio#microphone"
+        ]
+    },
+
+    "group/exit": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/power_btn",
+            "custom/lock_screen"
+        ]
     },
 
     "tray": {
@@ -138,12 +164,15 @@
     },
     
     "temperature": {
-        "thermal-zone": 7,
+        // No "thermal-zone"/"hwmon-path" here: the CPU sensor differs per
+        // machine, so each bar in config.jsonc supplies its own.
         "interval": 5,
         "format": "{icon}  {temperatureC}°C",
-        // Graduated thermometer icons: fill rises with temperature instead of
-        // a single static glyph. Ported from the ROG Flow X13's live config.
-        "format-icons": ["", "", ""],
+        // Graduated thermometer: the fill rises with the temperature.
+        // FontAwesome thermometer-empty..three-quarters (U+F2CB..F2C8);
+        // the previous set used two Material Design codepoints that Nerd
+        // Fonts v3 dropped, so two of the three steps rendered as tofu.
+        "format-icons": ["", "", "", ""],
         "format-alt-click": "click-right",
         "critical-threshold": 80,
         "format-critical": " {temperatureC}°C",
