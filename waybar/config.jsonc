@@ -2,10 +2,17 @@
 // because Waybar only instantiates a bar whose "output" matches a monitor that
 // is actually connected:
 //
-//   "!eDP-2"  → full bar: the desktop's ultrawide, or any external screen
-//               plugged into the laptop. Room for everything.
-//   "eDP-2"   → compact bar: the ROG Flow X13's internal 1920x1200 panel.
-//               No persistent workspace numbers, no RAM/disk readouts.
+//   "!eDP-2", "*"  → full bar: the desktop's ultrawide, or any external screen
+//                    plugged into the laptop. Room for everything.
+//   "eDP-2"        → compact bar: the ROG Flow X13's internal 1920x1200 panel.
+//                    No persistent workspace numbers, no RAM/disk readouts.
+//
+// The trailing "*" on the exclusion entry is required, not decorative: per
+// `man 5 waybar`, an "output" array of only exclusions matches nothing on its
+// own — you need "*" at the end to mean "everything else". Without it Waybar
+// starts, logs normally, and never creates a single bar — no error anywhere,
+// it just sits idle. Confirmed live: this shipped without the "*" and left
+// the desktop with no bar at all until caught.
 //
 // Module *definitions* are shared from modules.jsonc; each bar only picks which
 // of them it shows, plus the couple of per-machine overrides below. Waybar's
@@ -20,7 +27,7 @@
         "exclusive": true,
         "passthrough": false,
         "gtk-layer-shell": true,
-        "output": ["!eDP-2"],
+        "output": ["!eDP-2", "*"],
 
         "include": [
             "~/.config/waybar/modules.jsonc"
