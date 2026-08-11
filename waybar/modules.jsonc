@@ -111,12 +111,15 @@
 
     "backlight": {
         // No "device" set: Waybar auto-picks the available backlight device.
-        // This desktop has none (module just disables itself); the laptop's
-        // panel gets picked up automatically regardless of its device name.
+        // on-scroll commands restricted to the "backlight" *class*
+        // specifically: without it, a bare `brightnessctl set` on a machine
+        // with no real backlight falls back to the first device of *any*
+        // class — which was the keyboard's caps lock LED here, so scrolling
+        // this widget toggled Caps Lock instead of doing nothing.
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
-        "on-scroll-up": "brightnessctl set 1%+",
-        "on-scroll-down": "brightnessctl set 1%-",
+        "on-scroll-up": "brightnessctl --class=backlight set 1%+",
+        "on-scroll-down": "brightnessctl --class=backlight set 1%-",
         "tooltip-format": "Brightness",
         "tooltip": true
     },
