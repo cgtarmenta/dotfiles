@@ -81,6 +81,25 @@
         // Desktop CPU sensor.
         "temperature": {
             "thermal-zone": 7
+        },
+
+        // "backlight" swapped for "custom/monitor_brightness": this is an
+        // external monitor, no Linux "backlight" sysfs device applies to it.
+        // --sn identifies this LG panel specifically, by its real EDID
+        // serial (the Kamvas below has none, hence --model there instead).
+        "group/hardware": {
+            "modules": [
+                "battery",
+                "power-profiles-daemon",
+                "custom/ac_idle_mode",
+                "custom/wl-gammarelay-temperature",
+                "custom/monitor_brightness"
+            ]
+        },
+        "custom/monitor_brightness": {
+            "exec": "~/.config/waybar/scripts/monitor-brightness.sh get --sn 107NTUW5C662",
+            "on-scroll-up": "~/.config/waybar/scripts/monitor-brightness.sh inc --sn 107NTUW5C662",
+            "on-scroll-down": "~/.config/waybar/scripts/monitor-brightness.sh dec --sn 107NTUW5C662"
         }
     },
 
@@ -138,6 +157,26 @@
         // laptop's compact bar below. The full bar keeps the address.
         "network": {
             "format-ethernet": " "
+        },
+
+        // "backlight" swapped for "custom/monitor_brightness" — same
+        // reasoning as the full bar. The Kamvas has no usable EDID serial
+        // (ddcutil detect shows a placeholder), so --model selects it
+        // instead; the LG panel has a distinct model name so this can't
+        // cross-match it.
+        "group/hardware": {
+            "modules": [
+                "battery",
+                "power-profiles-daemon",
+                "custom/ac_idle_mode",
+                "custom/wl-gammarelay-temperature",
+                "custom/monitor_brightness"
+            ]
+        },
+        "custom/monitor_brightness": {
+            "exec": "~/.config/waybar/scripts/monitor-brightness.sh get --model \"Kamvas Pro 13\"",
+            "on-scroll-up": "~/.config/waybar/scripts/monitor-brightness.sh inc --model \"Kamvas Pro 13\"",
+            "on-scroll-down": "~/.config/waybar/scripts/monitor-brightness.sh dec --model \"Kamvas Pro 13\""
         }
     },
 

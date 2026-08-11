@@ -223,6 +223,19 @@
         "tooltip-format": "GPU Mode: {}"
     },
 
+    "custom/monitor_brightness": {
+        // Real hardware backlight for external monitors, via DDC/CI
+        // (VCP 10) instead of the Linux "backlight" sysfs class, which
+        // only covers internally-wired panels. exec/on-scroll-* are left
+        // unset here on purpose: config.jsonc overrides them per bar with
+        // the right --model/--sn selector for whichever monitor that bar
+        // lives on, exactly like "temperature" already does for its sensor.
+        "format": "󰃟 {}",
+        "return-type": "json",
+        "interval": 10,
+        "tooltip": true
+    },
+
     "custom/ac_idle_mode": {
         // Laptop-only AC no-idle toggle. Same supergfxctl gate as
         // custom/asus_gpu_mode keeps it off the desktop bar entirely.
