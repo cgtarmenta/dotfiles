@@ -13,6 +13,8 @@
         "window-rewrite": {
             "title<.*youtube.*>": " ",
             "(.*) - Google Chrome": " ",
+            "(.*) — Mozilla Firefox": "\ue745 ",
+            "class<firefox>": "\ue745 ",
             "(.*)Code-OSS": "󰨞 ",
             "class<code-oss>": "󰨞 ",
             "(.*) - Nautilus": " ",
@@ -38,6 +40,8 @@
         "format": "{}",
         "rewrite": {
             "(.*) - Google Chrome": " $1",
+            "(.*) — Mozilla Firefox": " $1",
+            "class<firefox>": "\ue745 $1",
             "(.*) - Code-OSS": "󰨞 $1",
             "(.*) - Nautilus": " $1",
             "(.*) - Discord": "\uF1FF $1",
