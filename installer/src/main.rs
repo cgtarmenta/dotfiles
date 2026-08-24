@@ -127,6 +127,10 @@ fn execute_menu_action(id: usize) -> anyhow::Result<()> {
             println!("Installing optional programs...\n");
             run_script_function("install_optional")?;
         }
+        8 => {
+            println!("Installing ROG GRUB theme...\n");
+            run_script_function("install_grub_theme")?;
+        }
         _ => {}
     }
 
