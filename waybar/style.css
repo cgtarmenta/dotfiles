@@ -85,6 +85,23 @@ tooltip {
 #clock,
 #network,
 #window,
+#power-profiles-daemon,
+#custom-ac_idle_mode,
+#temperature,
+#battery,
+#backlight,
+#custom-wl-gammarelay-temperature,
+#pulseaudio {
+    background-color: #2f354a;
+    margin: 0 0 0 0;
+    padding: 0px 7px 0px 7px;
+    border-radius: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;  
+    border: none;
+}
 #custom-rofi,
 #custom-power_btn,
 #custom-lock_screen,
@@ -92,13 +109,6 @@ tooltip {
 #custom-updates,
 #custom-github,
 #custom-media,
-#power-profiles-daemon,
-#custom-ac_idle_mode,
-#temperature,
-#battery,
-#backlight,
-#custom-wl-gammarelay-temperature,
-#pulseaudio,
 #tray,
 #custom-swaync {
     background-color: #2f354a;
