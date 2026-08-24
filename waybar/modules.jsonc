@@ -17,16 +17,17 @@
             "class<code-oss>": "󰨞 ",
             "(.*) - Nautilus": " ",
             "class<discord>": " ",
-            "Steam": " ",
-            "class<org.telegram.desktop>": " ",
-            "WhatsDesk": " ",
+            "Steam": " ",
+            "class<org.telegram.desktop>": " ",
+            "WhatsDesk": " ",
             "Warp": " ",
             "class<spotify>": " ",
             "class<notion>": " ", // TODO add notion's symbol icon
-            "class<unityhub>": " ",
-            "class<Unity>": " ",
+            "class<unityhub>": " UnityHub",
+            "class<Unity>": " Unity",
             "class<zenity>": " ",
-            "class<MuPDF>": " "
+            "class<MuPDF>": " ",
+            "idea": " "
         }
         // "persistent-workspaces" lives in config.jsonc: the full bar pins all
         // ten numbers, the laptop's compact bar shows only the ones in use.
@@ -39,14 +40,15 @@
             "(.*) - Code-OSS": "󰨞 $1",
             "(.*) - Nautilus": " $1",
             "(.*) - Discord": " $1",
-            "Unity - (.*)": " $1",
-            "Steam": " Steam",
-            "WhatsDesk": " WhatsDesk",
+            "Unity - (.*)": " $1",
+            "Steam": " Steam",
+            "WhatsDesk": " $1",
             "Warp": "  $1",
             "class<org.telegram.desktop>": " $1",
             "class<spotify>": " Spotify",
-            "class<unityhub>": " UnityHub",
-            "class<zenity>": "  Lenovo Vantage"
+            "class<unityhub>": " UnityHub",
+            "class<zenity>": "  Lenovo Vantage",
+            "idea": " IntelliJ IDEA"
         },
         "icon": true,
         "separate-output": true
