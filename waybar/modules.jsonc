@@ -12,9 +12,9 @@
         },
         "window-rewrite": {
             "title<.*youtube.*>": " ", 
-            "(.*) - Chrome": " ",
+            "(.*) - Google Chrome": " ",
             "(.*)Code-OSS": "󰨞 ",
-            "class<Codium>": "󰨞 ",
+            "class<code-oss>": "󰨞 ",
             "(.*) - Nautilus": " ",
             "class<discord>": " ",
             "Steam": " ",

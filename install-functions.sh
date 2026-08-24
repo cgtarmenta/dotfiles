@@ -342,16 +342,24 @@ install_optional() {
     fi
 }
 
-# Function 8: Install GRUB ROG Theme
+# Function 8: Install GRUB ROG Theme (from upstream fork)
 install_grub_theme() {
     log_info "Installing ROG GRUB theme..."
 
-    local repo_dir="$(pwd)"
-    local theme_src="$repo_dir/grub/themes/ROG"
+    local upstream="https://github.com/cgtarmenta/ROG_GRUB_Theme.git"
+    local tmpdir="$(mktemp -d)"
     local theme_dst="/usr/share/grub/themes/ROG"
 
-    if [ ! -d "$theme_src" ]; then
-        log_error "ROG theme not found at $theme_src"
+    log_info "Cloning $upstream..."
+    if ! git clone --depth 1 "$upstream" "$tmpdir"; then
+        log_error "Failed to clone ROG GRUB theme from $upstream"
+        rm -rf "$tmpdir"
+        return 1
+    fi
+
+    if [ ! -d "$tmpdir/ROG" ]; then
+        log_error "Theme directory ROG/ not found in upstream repo"
+        rm -rf "$tmpdir"
         return 1
     fi
 
@@ -359,7 +367,8 @@ install_grub_theme() {
     log_info "Copying theme to $theme_dst..."
     sudo rm -rf "$theme_dst"
     sudo mkdir -p "$(dirname "$theme_dst")"
-    sudo cp -r "$theme_src" "$theme_dst"
+    sudo cp -r "$tmpdir/ROG" "$theme_dst"
+    rm -rf "$tmpdir"
 
     # Point GRUB at the theme and regenerate the config
     log_info "Configuring GRUB_THEME in /etc/default/grub..."
