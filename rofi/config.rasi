@@ -1,136 +1,82 @@
-/*
- * ROFI color theme
- *
- * Based on Base16 Material Color Scheme (https://github.com/ntpeters/base16-materialtheme-scheme)
- *
- * Modified by: Dave Davenport
- * User: Tomaszal
- * Copyright: Tomas Zaluckij
- */
+@theme "/dev/null"
 
 * {
-	base00: #263238;
-	base01: #2E3C43;
-	base02: #314549;
-	base03: #546E7A;
-	base04: #B2CCD6;
-	base05: #EEFFFF;
-	base06: #EEFFFF;
-	base07: #FFFFFF;
-	base08: #F07178;
-	base09: #F78C6C;
-	base0A: #FFCB6B;
-	base0B: #C3E88D;
-	base0C: #89DDFF;
-	base0D: #82AAFF;
-	base0E: #C792EA;
-	base0F: #FF5370;
-
-	/*base0D: #00BCD4;*/
-
-	spacing: 0;
-	background-color: transparent;
-
+	bg: #181E27;
+	background-color: @bg;
 }
 
-window {
+
+configuration {
+	show-icons: true;
+		icon-theme: "Papirus";
+	location: 0;
+	font: "JetBrainsMono Nerd Font 12";	
+	display-drun: "Launch:";
+}
+
+window { 
+	width: 35%;
 	transparency: "real";
-	background-color: #263238CC; /*base00 + CC (80% opacity)*/
+	orientation: vertical;
+	border-color: #74adc0;
 }
 
 mainbox {
-	children: [inputbar, message, mode-switcher, listview];
-	spacing: 30px;
-	padding: 30px 0;
-	border: 1px;
-	border-color: @base0D;
+	children: [inputbar, listview];
 }
 
-inputbar {
-	padding: 0 30px;
-	children: [prompt, textbox-prompt-colon, entry, case-indicator];
-}
 
-prompt {
-	text-color: @base0D;
-}
-
-textbox-prompt-colon {
-	expand: false;
-	str: ":";
-	margin: 0 1ch 0 0;
-	text-color: @base0D;
-}
-
-entry {
-	text-color: @base07;
-}
-
-case-indicator {
-	text-color: @base0F;
-}
-
-mode-switcher, message {
-	border: 1px 0;
-	border-color: @base0D;
-}
-
-button, textbox {
-	background-color: @base03;
-	text-color: @base07;
-	padding: 5px;
-}
-
-button selected {
-	background-color: @base0D;
-}
-
-listview {
-	scrollbar: true;
-	margin: 0 10px 0 30px;
-}
-
-scrollbar {
-	background-color: @base03;
-	handle-color: @base0D;
-	handle-width: 10px;
-	border: 0 1px;
-	border-color: @base0D;
-	margin: 0 0 0 20px;
-}
+// ELEMENT
+// -----------------------------------
 
 element {
-	padding: 5px;
-  spacing: 5px;
-	highlight: bold underline;
-	children: [element-icon, element-text];
-}
-element-text, element-icon {
-	background-color : inherit;
-	text-color	     : inherit;
-	foreground-color : inherit;
-}
-
-element normal {
-	background-color: transparent;
+	padding: 4 12;
+	text-color: #EFE7DD;
 }
 
 element selected {
-	background-color: @base0D;
+	background-color: #74adc0;
 }
 
-element alternate {
-	/*background-color: @base03;*/
+element-text {
+	background-color: inherit;
+	text-color: inherit;
 }
 
-element normal normal, element selected normal, element alternate normal {
-	text-color: @base07;
+element-icon {
+	size: 16 px;
+	background-color: inherit;
+	padding: 0 6 0 0;
+	alignment: vertical;
 }
 
-element normal urgent, element selected urgent, element alternate urgent {
-	text-color: @base0F;
+listview {
+	columns: 2;
+	lines: 9;
+	padding: 8 0;
+	fixed-height: true;
+	fixed-columns: true;
+	fixed-lines: true;
+	border: 0 10 6 10;
 }
 
-element normal active, element selected active, element alternate active {
-	text-color: @base0B;
+// INPUT BAR 
+//------------------------------------------------
+
+entry {
+	text-color: #EFE7DD;
+	padding: 10 10 0 0;
+	margin: 0 -2 0 0;
+}
+
+inputbar {
+	background-image: url("images/rofi.png", width);
+	padding: 300 0 0;
+	margin: 0 0 0 0;
+} 
+
+prompt {
+	text-color: #aaffaa;
+	padding: 10 6 0 10;
+	margin: 0 -2 0 0;
 }
