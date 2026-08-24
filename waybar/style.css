@@ -138,6 +138,9 @@ tooltip {
     border-radius: 18px;
     margin-left: 20px;
     margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0px 7px 0px 7px;
 }
 
 window#waybar.empty #window {
