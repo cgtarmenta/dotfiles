@@ -16,18 +16,19 @@
             "(.*)Code-OSS": "󰨞 ",
             "class<code-oss>": "󰨞 ",
             "(.*) - Nautilus": " ",
-            "class<discord>": " ",
-            "Steam": " ",
-            "class<org.telegram.desktop>": " ",
+            "class<discord>": "\uf1ff ",
+            "Steam": "\uf1b6 ",
+            "class<org.telegram.desktop>": "\uf2c6 ",
             "WhatsDesk": " ",
-            "Warp": " ",
+            "Warp": "\uea85 ",
             "class<spotify>": " ",
             "class<notion>": " ", // TODO add notion's symbol icon
             "class<unityhub>": " UnityHub",
-            "class<Unity>": " Unity",
+            "class<Unity>": "\ue721 Unity",
             "class<zenity>": " ",
             "class<MuPDF>": " ",
-            "idea": " "
+            "idea": " ",
+            "delphos": "\udb84\udf2e"
         }
         // "persistent-workspaces" lives in config.jsonc: the full bar pins all
         // ten numbers, the laptop's compact bar shows only the ones in use.
@@ -39,9 +40,9 @@
             "(.*) - Google Chrome": " $1",
             "(.*) - Code-OSS": "󰨞 $1",
             "(.*) - Nautilus": " $1",
-            "(.*) - Discord": " $1",
+            "(.*) - Discord": "\uF1FF $1",
             "Unity - (.*)": " $1",
-            "Steam": " Steam",
+            "Steam": "\uF1B6 Steam",
             "WhatsDesk": " $1",
             "Warp": "  $1",
             "class<org.telegram.desktop>": " $1",
