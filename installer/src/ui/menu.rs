@@ -66,6 +66,12 @@ impl MenuState {
                     completed: false,
                 },
                 MenuItem {
+                    id: 8,
+                    title: "Install ROG GRUB Theme".to_string(),
+                    description: "Install Republic of Gamers GRUB boot theme".to_string(),
+                    completed: false,
+                },
+                MenuItem {
                     id: 0,
                     title: "Exit".to_string(),
                     description: "Quit installer".to_string(),

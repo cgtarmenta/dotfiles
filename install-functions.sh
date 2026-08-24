@@ -93,6 +93,7 @@ full_installation() {
     setup_waybar_modules || return 1
     install_starship || return 1
     install_optional || return 1
+    install_grub_theme || return 1
     
     log_success "Full installation completed!"
 }
@@ -339,6 +340,40 @@ install_optional() {
         log_info "Skipping optional programs"
         return 0
     fi
+}
+
+# Function 8: Install GRUB ROG Theme
+install_grub_theme() {
+    log_info "Installing ROG GRUB theme..."
+
+    local repo_dir="$(pwd)"
+    local theme_src="$repo_dir/grub/themes/ROG"
+    local theme_dst="/usr/share/grub/themes/ROG"
+
+    if [ ! -d "$theme_src" ]; then
+        log_error "ROG theme not found at $theme_src"
+        return 1
+    fi
+
+    # Remove any previous copy, then install fresh
+    log_info "Copying theme to $theme_dst..."
+    sudo rm -rf "$theme_dst"
+    sudo mkdir -p "$(dirname "$theme_dst")"
+    sudo cp -r "$theme_src" "$theme_dst"
+
+    # Point GRUB at the theme and regenerate the config
+    log_info "Configuring GRUB_THEME in /etc/default/grub..."
+    if grep -q "^GRUB_THEME=" /etc/default/grub; then
+        sudo sed -i "s|^GRUB_THEME=.*|GRUB_THEME=$theme_dst/theme.txt|" /etc/default/grub
+    else
+        echo "GRUB_THEME=$theme_dst/theme.txt" | sudo tee -a /etc/default/grub > /dev/null
+    fi
+
+    log_info "Regenerating GRUB config..."
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+    log_success "ROG GRUB theme installed successfully"
+    return 0
 }
 
 # Main execution check
