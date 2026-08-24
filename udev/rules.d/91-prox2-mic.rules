@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="sound", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0af7", KERNEL=="controlC*", RUN+="/home/dat30/github/dotfiles/udev/prox2-mic-unmute.sh"
