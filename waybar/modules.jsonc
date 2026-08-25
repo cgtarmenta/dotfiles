@@ -15,6 +15,7 @@
             "(.*) - Google Chrome": " ",
             "(.*) — Mozilla Firefox": "\ue745 ",
             "class<firefox>": "\ue745 ",
+            "class<slack>": "\ue8a4 ",
             "(.*)Code-OSS": "󰨞 ",
             "class<code-oss>": "󰨞 ",
             "(.*) - Nautilus": " ",
@@ -42,6 +43,7 @@
             "(.*) - Google Chrome": " $1",
             "(.*) — Mozilla Firefox": " $1",
             "class<firefox>": "\ue745 $1",
+            "class<slack>": "\ue8a4 $1",
             "(.*) - Code-OSS": "󰨞 $1",
             "(.*) - Nautilus": " $1",
             "(.*) - Discord": "\uF1FF $1",
@@ -412,7 +414,7 @@
         "format-alt-click": "click-right",
         "interval": 3600,
         "return-type": "json",
-        "exec": "~/.config/waybar/scripts/weather.sh Valladolid",
+        "exec": "~/.config/waybar/scripts/weather.sh",
         "exec-if": "ping wttr.in -c1"
     },
 
