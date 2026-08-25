@@ -154,7 +154,10 @@ window#waybar.empty #window {
     border-radius: 18px;
     color: #fab387;
 }
-
+#custom-weather {
+    margin-left: 5px;
+    margin-right: 5px;
+}
 
 /* ── RIGHT: one continuous pill ──
    tray = left edge … swaync = right edge, everything else flat */

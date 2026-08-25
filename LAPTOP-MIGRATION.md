@@ -72,8 +72,8 @@ symlink, got written straight into the git repo.
       (no `hyprland.conf` alongside it) right before restarting.
 - [ ] Log out and back in (or fully restart Hyprland) — not just `hyprctl reload`.
 - [ ] After login: `hyprctl configerrors` should be empty. Check monitors
-      (`hyprctl monitors`), keyboard layout, and that `swaybg`/`swaync`/
-      `wl-gammarelay` are running (`pgrep -a swaybg` etc.) — if the wallpaper is
+      (`hyprctl monitors`), keyboard layout, and that `mpvpaper`/`swaync`/
+      `wl-gammarelay` are running (`pgrep -a mpvpaper` etc.) — if the wallpaper is
       missing, something regressed on the "runs at startup" wiring that was
       already fixed once for the desktop.
 - [ ] Test clicking a workspace number in Waybar (needs `waybar-git` from step 2).

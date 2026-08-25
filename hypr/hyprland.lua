@@ -64,16 +64,16 @@ end)
 -- plain exec equivalent: runs at startup AND re-runs on every config reload.
 -- NOTE: unlike the old hyprlang `exec = ...`, the "config.reloaded" event
 -- does NOT fire on the initial config load at compositor start (confirmed
--- live: swaybg never launched on first login, only after a manual
+-- live: mpvpaper never launched on first login, only after a manual
 -- `hyprctl reload`) — so this has to be wired into both events explicitly.
 local function runOnEveryConfigLoad()
-    -- swaybg has no IPC and won't replace itself, so re-running it on every
+    -- mpvpaper has no IPC and won't replace itself, so re-running it on every
     -- reload used to just stack another copy on top of the live one. Start the
     -- new instance, give it half a second to paint, then reap anything older
     -- than a second: the wallpaper never blinks and only one process survives.
     -- swaync and wl-gammarelay-rs need no such handling — a second instance
     -- fails to acquire its D-Bus name and exits on its own.
-    hl.exec_cmd("swaybg -m fill -i ~/.config/hypr/moon-over-mondstat.jpg & sleep 0.5; killall -o 1s swaybg")
+    hl.exec_cmd("mpvpaper -f -o \"no-audio --loop-playlist=inf\" \"*\" ~/.config/hypr/moon-over-mondstat.jpg & sleep 0.5; killall -o 1s mpvpaper 2>/dev/null")
     hl.exec_cmd("swaync")
     -- wl-gammarelay-rs, not plain wl-gammarelay: exposes each output
     -- separately over D-Bus (/outputs/<NAME>), so a multi-monitor desktop
@@ -207,7 +207,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("nautilus"))           -- Open filema
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())                 -- Close the active window
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("uwsm stop"))  -- Exit Hyprland session via UWSM
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))     -- Allow a window to float
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("rofi -show drun"))         -- Show the graphical app launcher
+hl.bind(mainMod .. "+ SPACE", hl.dsp.exec_cmd("rofi -show drun"))         -- Show the graphical app launcher
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })) -- Toggle fullscreen
 hl.bind(mainMod .. " + Y", hl.dsp.window.pin())                   -- Pin window (shows on all workspaces)
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))          -- Toggle dwindle split direction
@@ -354,7 +354,7 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
 -- hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("swaylock && systemctl suspend"), { locked = true })
 
 -- Change background image
-hl.bind(mainMod .. " + SHIFT + SPACE + 1", hl.dsp.exec_cmd("swaybg -m fill -i ~/.config/hypr/moon-over-mondstat.jpg"))
-hl.bind(mainMod .. " + SHIFT + SPACE + 2", hl.dsp.exec_cmd("swaybg -m fill -i ~/.config/hypr/sucrose.jpg"))
-hl.bind(mainMod .. " + SHIFT + SPACE + 3", hl.dsp.exec_cmd("swaybg -m fill -i ~/.config/hypr/sayu-without-char.jpg"))
-hl.bind(mainMod .. " + SHIFT + SPACE + 4", hl.dsp.exec_cmd("swaybg -m fill -i ~/.config/hypr/xiao.jpg"))
+hl.bind(mainMod .. " + SHIFT + SPACE + 1", hl.dsp.exec_cmd("mpvpaper -f -o \"no-audio --loop-playlist=inf\" \"*\" ~/.config/hypr/moon-over-mondstat.jpg"))
+hl.bind(mainMod .. " + SHIFT + SPACE + 2", hl.dsp.exec_cmd("mpvpaper -f -o \"no-audio --loop-playlist=inf\" \"*\" ~/.config/hypr/sucrose.jpg"))
+hl.bind(mainMod .. " + SHIFT + SPACE + 3", hl.dsp.exec_cmd("mpvpaper -f -o \"no-audio --loop-playlist=inf\" \"*\" ~/.config/hypr/sayu-without-char.jpg"))
+hl.bind(mainMod .. " + SHIFT + SPACE + 4", hl.dsp.exec_cmd("mpvpaper -f -o \"no-audio --loop-playlist=inf\" \"*\" ~/.config/hypr/xiao.jpg"))

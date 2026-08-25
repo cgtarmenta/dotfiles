@@ -75,7 +75,8 @@ Below a table of each package that should be installed, and its purpose. If you 
 | `hyprland`                | Hyprland compositor |
 || `warp-terminal`           | Default terminal |
 | `waybar`                  | Customizable Wayland bar |
-| `swaybg`                  | Used to set a desktop background image |
+| `waypaper`                | GUI wallpaper manager |
+| `mpvpaper`                | Used to set a desktop background image or video /wallpaper engine |
 | `rofi`                    | A window switcher, application launcher and dmenu replacement (2.0 absorbed the old `rofi-wayland` fork) |
 | `swaync`                  | Graphical notification daemon |
 || `nautilus`                | Graphical file manager (GNOME Files) |
@@ -247,7 +248,7 @@ Credit to [Shade of a cat](https://shadeofacat.carrd.co/) and [Sevenics](https:/
 > I don't remember why I converted all the backgrounds from png to jpg, it should work either way. Too lazy to check the wiki. 
 
 To add a new wallpaper to hyprland, add a `hl.bind(...)` call for it near the other background binds in [hyprland.lua](./hypr/hyprland.lua), specifying the location of the image.
-To set it at start, change the `swaybg` command inside the `hl.on("config.reloaded", ...)` block in the [config](./hypr/hyprland.lua) to the background image. 
+To set it at start, change the `mpvpaper` command inside the `hl.on("config.reloaded", ...)` block in the [config](./hypr/hyprland.lua) to the background image. 
 
 In the same way you can edit the top line of the [swaylock config](./swaylock/config) to change the background image. 
 

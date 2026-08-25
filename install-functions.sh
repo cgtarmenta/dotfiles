@@ -122,7 +122,7 @@ install_packages() {
     log_info "Installing Hyprland and dependencies..."
     local repo_packages=(
         hyprland warp-terminal waybar
-        swaybg swaylock-effects swaylock-fancy rofi wlogout swaync nautilus
+        swaylock-effects swaylock-fancy rofi wlogout swaync nautilus
         swayidle hypridle uwsm ttf-jetbrains-mono-nerd polkit-gnome starship
         satty grim slurp pamixer brightnessctl gvfs
         bluez bluez-utils blueman nwg-look xfce4-settings
@@ -135,7 +135,7 @@ install_packages() {
     # clickup-desktop rather than the better-known clickup, whose PKGBUILD
     # carries a sha256 upstream has since invalidated; both give /usr/bin/clickup.
     local aur_packages=(
-        dracula-gtk-theme wl-gammarelay
+        dracula-gtk-theme wl-gammarelay mpvpaper waypaper
         whatsdesk-bin slack-desktop-wayland clickup-desktop
     )
 

@@ -11,7 +11,7 @@ This is a personal dotfiles repository for a Hyprland-based desktop environment 
 - **Rofi**: Application launcher
 - **Swaylock**: Screen locker
 - **Wlogout**: Logout menu
-- Various supporting utilities (swaybg, swayidle, swaync, etc.)
+- Various supporting utilities (mpvpaper, swayidle, swaync, etc.)
 
 The repository is designed for fresh installations and uses a Rust TUI installer (`installer/`) plus shared shell functions (`install-functions.sh`). The legacy `install.sh` is removed.
 
@@ -116,7 +116,7 @@ Key aspects of `hypr/hyprland.lua` (migrated from the legacy `hyprland.conf` for
 - **Input**: Spanish keyboard layout (`kb_layout = "es"`)
 - **Monitor Setup**: Supports multi-monitor (1920x1080@60Hz defaults)
 - **Layout**: Dwindle tiling algorithm
-- **Startup Apps**: polkit-gnome, waybar, blueman-applet, nm-applet, swaybg, swaync, wl-gammarelay, tailscale
+- **Startup Apps**: polkit-gnome, waybar, blueman-applet, nm-applet, mpvpaper, swaync, wl-gammarelay, tailscale
 - **Keybinds**: Super as main modifier (CachyOS-compatible)
   - Super+Return: Terminal (kitty)
   - Super+Q: Kill window
@@ -192,7 +192,7 @@ No automated tests. Validation is manual:
 1. Place image in `hypr/` directory (jpg preferred by author)
 2. Add keybind in `hypr/hyprland.lua`:
    ```lua
-   hl.bind(mainMod .. " + SHIFT + SPACE + 5", hl.dsp.exec_cmd("swaybg -m fill -i ~/.config/hypr/new-wallpaper.jpg"))
+   hl.bind(mainMod .. " + SHIFT + SPACE + 5", hl.dsp.exec_cmd("mpvpaper -f -o "no-audio --loop-playlist=inf" "*" ~/.config/hypr/new-wallpaper.jpg"))
    ```
 3. Update `swaylock/config` to change lock screen wallpaper
 
