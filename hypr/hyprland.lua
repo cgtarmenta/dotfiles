@@ -73,7 +73,7 @@ local function runOnEveryConfigLoad()
     -- than a second: the wallpaper never blinks and only one process survives.
     -- swaync and wl-gammarelay-rs need no such handling — a second instance
     -- fails to acquire its D-Bus name and exits on its own.
-    hl.exec_cmd("mpvpaper -f -o \"no-audio --loop-playlist=inf\" \"*\" ~/.config/hypr/moon-over-mondstat.jpg & sleep 0.5; killall -o 1s mpvpaper 2>/dev/null")
+    hl.exec_cmd_once("waypaper --restore")
     hl.exec_cmd("swaync")
     -- wl-gammarelay-rs, not plain wl-gammarelay: exposes each output
     -- separately over D-Bus (/outputs/<NAME>), so a multi-monitor desktop
