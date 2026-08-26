@@ -168,7 +168,7 @@ deploy_configs() {
     local config_dir="$HOME/.config"
     local repo_dir="$(pwd)"
     local backup_dir="$HOME/.config-backup-$(date +%Y%m%d-%H%M%S)"
-    local items=(hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber hyfetch.json)
+    local items=(hypr kitty neofetch swayidle swaylock waybar wlogout rofi pipewire wireplumber hyfetch.json waypaper)
 
     # Back up anything real (not one of our own symlinks from a previous deploy)
     local needs_backup=0
