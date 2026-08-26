@@ -120,7 +120,7 @@ hl.config({
 
     misc = {
         disable_hyprland_logo = true,
-        vrr = 2,
+        vrr = 1,
     },
 
     decoration = {
