@@ -202,7 +202,7 @@ hl.window_rule({ match = { class = "^(rofi)$" }, move = "cursor -3% -105%" })
 local mainMod = "SUPER"
 
 -- Emergency keybinds
-hl.bind("CTRL + ALT + T", hl.dsp.exec_cmd("warp-terminal"))       -- Open terminal (alternative)
+hl.bind("CTRL + ALT + T", hl.dsp.exec_cmd("delphos"))       -- Open terminal (alternative)
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("warp-terminal")) -- Open the terminal
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("nautilus"))           -- Open filemanager
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())                 -- Close the active window
